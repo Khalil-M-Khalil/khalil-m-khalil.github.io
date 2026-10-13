@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khalil Khalil | Portfolio</title>
+<meta name="description" content="Modern portfolio for Khalil Khalil: design, photography, content creation, cybersecurity research, achievements, and contact links.">
+<meta name="theme-color" content="#050505">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas class="site-bg-canvas" id="bgCanvas" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#home" aria-label="Khalil Khalil home"><span class="brand-mark">K</span><span>Khalil Khalil</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#studio">Studio</a>
+      <a href="#work">Work</a>
+      <a href="#research">Research</a>
+      <a href="#awards">Awards</a>
+      <a class="nav-action" href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow reveal">Multidisciplinary visual creative</span>
+          <h1 class="reveal">Khalil<br><span class="serif">Khalil</span></h1>
+          <p class="hero-copy reveal">
+            I craft <strong>visual experiences</strong> through design, photography, storytelling, and modern technology, while building a sharp voice in cybersecurity awareness and research.
+          </p>
+          <div class="hero-actions reveal">
+            <a class="btn btn-primary" href="#work">View Work <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a>
+            <a class="btn" href="#contact">Start a Project</a>
+          </div>
+          <div class="hero-stats reveal">
+            <div class="metric"><b>#1</b><span>Cybersecurity Creator in Syria</span></div>
+            <div class="metric"><b>93%</b><span>Horizon Lab digital forensics score</span></div>
+            <div class="metric"><b>Top 50</b><span>Creators in the Arab world</span></div>
+          </div>
+        </div>
+
+        <div class="portrait-stage reveal">
+          <div class="portrait-card" data-tilt>
+            <img src="assets/portrait.webp" alt="Portrait of Khalil Khalil">
+          </div>
+          <div class="glass-console">
+            <div class="console-top"><span>CREATIVE TIMELINE</span><span id="timelinePercent">00%</span></div>
+            <div class="console-bars" aria-hidden="true">
+              <div class="bar"><span style="--w:92%"></span></div>
+              <div class="bar"><span style="--w:72%"></span></div>
+              <div class="bar"><span style="--w:84%"></span></div>
+            </div>
+            <div class="console-bottom"><span>Design</span><span>Photography</span><span>Security</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="scroll-cue">Scroll to explore</span>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track"><span>Photoshop</span><span>Illustrator</span><span>Premiere Pro</span><span>After Effects</span><span>Figma</span><span>HTML / CSS / JS</span><span>Photoshop</span><span>Illustrator</span><span>Premiere Pro</span><span>After Effects</span><span>Figma</span><span>HTML / CSS / JS</span></div>
+  </div>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-layout single">
+        <div>
+          <div class="section-head">
+            <span class="eyebrow reveal">About Me</span>
+            <h2 class="reveal">Visual thinker.<br><span class="serif">Creative builder.</span></h2>
+          </div>
+          <div class="about-copy reveal">
+            <p>I'm <strong>Khalil Khalil</strong>, a designer, photographer, content creator, and visual storyteller based in Syria, working with clients across the Arab world and beyond.</p>
+            <p>My work lives at the intersection of <strong>aesthetics and purpose</strong>, across visual, written and technical disciplines, always built to feel intentional.</p>
+            <p>I also study Computer Science and explore <strong>cybersecurity, security awareness, and cyber risk</strong>, bringing a creative and analytical lens to digital work.</p>
+            <p>I work fluently in <strong>English and Arabic</strong>, creating content that feels native across cultures.</p>
+          </div>
+                  </div>
+      </div>
+    </div>
+  </section>
+
+    <section class="section" id="process"><div class="container">
+      <div class="section-head"><span class="eyebrow reveal">How I Work</span><h2 class="reveal">From idea to <span class="serif">finish.</span></h2></div>
+      <div class="process-grid"><article class="step reveal"><span class="num">01</span><svg viewBox="0 0 240 120" aria-hidden="true"><path class="d" pathLength="1" d="M120 16a32 32 0 0 0-15 60v12h30V76a32 32 0 0 0-15-60z"/><path class="d" pathLength="1" d="M108 100h24M113 110h14"/><path class="d" pathLength="1" d="M120 0v6M62 22l5 4M178 22l-5 4M46 56h8M186 56h8"/><circle class="f" cx="84" cy="30" r="2.5"/><circle class="f" cx="160" cy="26" r="2"/><circle class="f" cx="170" cy="70" r="2.5"/></svg><h3>Idea</h3><p>Research, references and a clear creative direction.</p></article><article class="step reveal"><span class="num">02</span><svg viewBox="0 0 240 120" aria-hidden="true"><path class="d" pathLength="1" d="M30 96C70 8 150 8 210 96"/><path class="d" pathLength="1" stroke-dasharray="3 5" d="M30 96L62 22M210 96L178 22" style="stroke-dasharray:3 5;opacity:.6"/><rect class="d" pathLength="1" x="24" y="90" width="12" height="12"/><rect class="d" pathLength="1" x="204" y="90" width="12" height="12"/><circle class="f" cx="62" cy="22" r="4"/><circle class="f" cx="178" cy="22" r="4"/><circle class="d" pathLength="1" cx="120" cy="38" r="9"/></svg><h3>Design</h3><p>Layout, type and identity built on a sharp system.</p></article><article class="step reveal"><span class="num">03</span><svg viewBox="0 0 240 120" aria-hidden="true"><rect class="d" pathLength="1" x="20" y="18" width="110" height="20" rx="5"/><rect class="d" pathLength="1" x="70" y="48" width="140" height="20" rx="5"/><rect class="d" pathLength="1" x="20" y="78" width="80" height="20" rx="5"/><rect class="d" pathLength="1" x="112" y="78" width="70" height="20" rx="5"/><path class="d" pathLength="1" d="M150 6v104"/><path class="f" d="M143 4h14l-7 10z"/></svg><h3>Edit</h3><p>Rhythm, pacing and motion that hold attention.</p></article><article class="step reveal"><span class="num">04</span><svg viewBox="0 0 240 120" aria-hidden="true"><circle class="d" pathLength="1" cx="96" cy="50" r="32" style="fill:rgba(224,179,74,.22)"/><circle class="d" pathLength="1" cx="132" cy="50" r="32" style="fill:rgba(255,236,170,.16)"/><circle class="d" pathLength="1" cx="114" cy="80" r="32" style="fill:rgba(138,106,32,.35)"/><circle class="f" cx="20" cy="104" r="5"/><circle class="f" cx="36" cy="104" r="5" style="opacity:.6"/><circle class="f" cx="52" cy="104" r="5" style="opacity:.3"/></svg><h3>Color</h3><p>Grading and palettes tuned to the mood.</p></article><article class="step reveal"><span class="num">05</span><svg viewBox="0 0 240 120" aria-hidden="true"><circle class="d" pathLength="1" cx="120" cy="58" r="40"/><path class="d" pathLength="1" d="M100 60l14 14 28-30"/><path class="f" d="M190 20l3 8 8 3-8 3-3 8-3-8-8-3 8-3zM46 82l2 6 6 2-6 2-2 6-2-6-6-2 6-2zM196 92l2 5 5 2-5 2-2 5-2-5-5-2 5-2z"/></svg><h3>Finish</h3><p>Polish, export and delivery in every format.</p></article></div></div></section>
+  <section class="section" id="services"><div class="container">
+      <div class="section-head"><span class="eyebrow reveal">Services</span><h2 class="reveal">What I <span class="serif">do.</span></h2><p class="section-desc reveal">Creative, content and technical work, from first concept to final delivery.</p></div>
+      <div class="svc-grid reveal"><div class="svc-group"><h3>Creative</h3><details><summary>Creative Direction</summary><p>Setting the concept, visual language and standards a project is built on, then guiding it from first idea to final delivery.</p></details><details><summary>Design & Brand</summary><p>Identities, print, packaging and social media systems.</p></details><details><summary>Photography</summary><p>Product, portrait and editorial storytelling with a clean, cinematic eye.</p></details></div><div class="svc-group"><h3>Content & Social</h3><details><summary>Copywriting</summary><p>Clear, persuasive Arabic and English copy: captions, scripts, slogans and campaign messaging.</p></details><details><summary>Social Media Management</summary><p>Planning, publishing and running channels, from content calendars to posting rhythm and community replies.</p></details><details><summary>Social Media Analysis</summary><p>Reading performance data to see what works, and turning it into clear next steps for content and strategy.</p></details><details><summary>AI Content Creation</summary><p>Images, video and written content produced with generative AI, then directed and refined by hand for quality.</p></details><details><summary>Prompt Engineering</summary><p>Writing and iterating on prompts, and chaining tools together, to get reliable and repeatable results from AI models.</p></details></div><div class="svc-group"><h3>Tech & Analysis</h3><details><summary>Programming & Software Engineering</summary><p>Building web applications and tools, from the interface to the logic behind it.</p></details><details><summary>IT Business Analysis</summary><p>Translating business needs into requirements, workflows and documentation that technical teams can build from.</p></details><details><summary>Security Awareness</summary><p>Research, educational material and technical writing that makes complex threats easier to understand.</p></details></div></div></div></section>
+
+<section class="section studio" id="studio">
+    <div class="container">
+      <div class="studio-panel">
+        <div class="signal-box reveal">
+          <img class="signal-image" src="assets/phoenix.webp" alt="Phoenix local verification dashboard interface">
+          <canvas id="signalCanvas" aria-hidden="true"></canvas>
+          <div class="signal-label"><span>LIVE SIGNAL MAP</span><span>CREATIVE + SECURITY</span></div>
+        </div>
+        <div class="studio-copy">
+          <span class="eyebrow reveal">Professional Focus</span>
+          <h2 class="reveal">Where visuals meet <span class="serif">digital trust.</span></h2>
+          <p class="section-desc reveal">Beyond design and creative work, I am developing expertise in security awareness, cybersecurity consulting, cyber risk, compliance, and educational content that makes complex threats easier to understand.</p>
+          <div class="tag-wall reveal">
+            <span class="tag">Cyber Consulting</span><span class="tag">Risk & Compliance</span>
+          </div>
+          <a class="btn btn-primary reveal phoenix-btn" href="https://khalil-m-khalil.github.io/Phoenix/" target="_blank" rel="noopener">Explore Phoenix <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow reveal">Portfolio Hub</span>
+        <h2 class="reveal">Explore <span class="serif">my work.</span></h2>
+        <p class="section-desc reveal">A collection of design projects, creative work, technical experiments, and security research across multiple disciplines.</p>
+      </div>
+      <div class="portfolio-grid">
+        <a class="work-card reveal" href="https://drive.google.com/drive/folders/1rTo1E-fPrPY6pIhvT161_SrQnGuniPov?usp=sharing" target="_blank" rel="noopener" data-tilt>
+          <div class="card-media"><img src="assets/design.webp" alt="Brand identity board" loading="lazy"></div>
+          <span class="card-number">01 / DESIGN</span>
+          <h3>Google Drive Portfolio</h3>
+          <p>Brand identities, visual systems, packaging design, social media graphics, and creative projects.</p>
+          <span class="card-link">View Designs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        </a>
+        <a class="work-card reveal" href="https://github.com/Khalil-M-Khalil" target="_blank" rel="noopener" data-tilt>
+          <div class="card-media"><img src="assets/github.webp" alt="Code editor and commit graph" loading="lazy"></div>
+          <span class="card-number">02 / TECH</span>
+          <h3>GitHub Projects</h3>
+          <p>Code repositories, web development projects, technical documentation, and security-focused experiments.</p>
+          <span class="card-link">View Projects <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="research">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow reveal">Featured Research</span>
+        <h2 class="reveal">Security <span class="serif">discoveries.</span></h2>
+        <p class="section-desc reveal">Real vulnerability research, documented and reported responsibly.</p>
+      </div>
+      <div class="research-grid">
+        <article class="research-card reveal" data-tilt>
+          <div class="card-media"><img src="assets/facebook.webp" alt="Race condition request diagram" loading="lazy"></div>
+          <span class="card-number">FACEBOOK PLATFORM</span>
+          <h3>Race Condition Vulnerability</h3>
+          <p>Discovered and documented a race condition vulnerability on Facebook, reported with a full written report.</p>
+          <div class="research-meta"><span class="pill">Race Condition</span><span class="pill">Responsible Research</span></div>
+          <a class="card-link" href="https://drive.google.com/drive/folders/1HXxHzGPUjzUS0UELDB2VLeCQS-KJ0T_A?usp=drive_link" target="_blank" rel="noopener">View Report <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </article>
+        <article class="research-card reveal" data-tilt>
+          <div class="card-media"><img src="assets/tiktok.webp" alt="Open redirect proof of concept" loading="lazy"></div>
+          <span class="card-number">TIKTOK PLATFORM</span>
+          <h3>Open Redirect Vulnerability</h3>
+          <p>Discovered and documented an Open Redirect vulnerability on TikTok's platform, including proof-of-concept material.</p>
+          <div class="research-meta"><span class="pill">Open Redirect</span><span class="pill">Video PoC</span><span class="pill">Phishing Risk</span></div>
+          <a class="card-link" href="https://drive.google.com/drive/folders/1VuyMbpa0_QqTpSApIoMudfERDWdYarSr?usp=drive_link" target="_blank" rel="noopener">View PoC <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="awards">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow reveal">Recognition & Achievements</span>
+        <h2 class="reveal">Proof of <span class="serif">work.</span></h2>
+        <p class="section-desc reveal">Recognition across cybersecurity research, competitive platforms, and creator rankings.</p>
+      </div>
+      <div class="ach-grid">
+        <article class="ach-card reveal" data-tilt>
+          <div class="ach-media"><img src="assets/offsec.webp" alt="OffSec recognition for Khalil Khalil" loading="lazy"></div>
+          <div class="ach-body">
+            <p class="ach-org">OffSec</p>
+            <h3>Race Condition on Meta Platform</h3>
+            <p>Highlighted by OffSec for discovering and documenting a race condition vulnerability.</p>
+          </div>
+        </article>
+        <article class="ach-card reveal" data-tilt>
+          <div class="ach-media"><img src="assets/horizon.webp" alt="Horizon Lab achievement for Khalil Khalil" loading="lazy"></div>
+          <div class="ach-body">
+            <p class="ach-org">Horizon Lab</p>
+            <h3>#1 Syria · #177 Worldwide</h3>
+            <p>Ranked first in Syria with a 93% score using the Pheonix digital forensics tool.</p>
+          </div>
+        </article>
+        <article class="ach-card reveal" data-tilt>
+          <div class="ach-media"><img src="assets/favikon.webp" alt="Favikon creator ranking for Khalil Khalil" loading="lazy"></div>
+          <div class="ach-body">
+            <p class="ach-org">Favikon</p>
+            <h3>#1 Cybersecurity Creator</h3>
+            <p>Ranked #1 in Cybersecurity in Syria and Top 50 Creators in the Arab world.</p>
+          </div>
+        </article>
+      </div>
+      <div style="margin-top:18px">
+        <a class="btn" href="https://drive.google.com/drive/folders/1fVV4dVbT0LvDbXnkb4AqCLJVFaOdKqos?usp=drive_link" target="_blank" rel="noopener">View Achievement Archive</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="cv">
+    <div class="container">
+      <div class="cv-strip reveal">
+        <div>
+          <h3>Khalil Khalil — CV</h3>
+          <p>The full résumé, available to view or download.</p>
+        </div>
+        <div class="cv-actions">
+          <a class="btn" href="assets/Khalil_Khalil_CV.pdf" target="_blank" rel="noopener">View CV</a>
+          <a class="btn btn-primary" href="assets/Khalil_Khalil_CV.pdf" download="Khalil_Khalil_CV.pdf">Download CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="contact-layout">
+        <div>
+          <span class="eyebrow reveal">Get In Touch</span>
+          <h2 class="reveal">Let's <span class="serif">connect.</span></h2>
+          <p class="contact-lead reveal">Have a project in mind, want to collaborate, or want to talk creative/security ideas? I work remotely across Syria, the Gulf, the wider Arab world, and internationally.</p>
+          <a class="email-link reveal" href="mailto:khalilmkhalil0937@gmail.com">khalilmkhalil0937@gmail.com</a>
+        </div>
+        <div class="contact-list">
+          <a class="contact-item reveal" href="https://www.instagram.com/khalil_m_khalil09/" target="_blank" rel="noopener"><span><span class="contact-platform">Instagram</span><span class="contact-handle">@khalil_m_khalil09</span></span><span>Open</span></a>
+          <a class="contact-item reveal" href="https://www.facebook.com/kkalil.khalil" target="_blank" rel="noopener"><span><span class="contact-platform">Facebook</span><span class="contact-handle">kkalil.khalil</span></span><span>Open</span></a>
+          <a class="contact-item reveal" href="https://wa.me/khalil_m_khalil0" target="_blank" rel="noopener"><span><span class="contact-platform">WhatsApp</span><span class="contact-handle">@khalil_m_khalil0</span></span><span>Message</span></a>
+          <a class="contact-item reveal" href="https://github.com/Khalil-M-Khalil" target="_blank" rel="noopener"><span><span class="contact-platform">GitHub</span><span class="contact-handle">Khalil-M-Khalil</span></span><span>Open</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <b>Khalil Khalil</b>
+    <span>© 2026 · All rights reserved</span>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
