@@ -53,7 +53,7 @@ function onScroll() {
   const max = document.documentElement.scrollHeight - innerHeight;
   const progress = max > 0 ? scrollY / max : 0;
   scrollProgress.style.width = `${progress * 100}%`;
-  timelinePercent.textContent = `${String(Math.round(progress * 100)).padStart(2, '0')}%`;
+  if (timelinePercent) timelinePercent.textContent = `${String(Math.round(progress * 100)).padStart(2, '0')}%`;
   let active = sections[0]?.id;
   sections.forEach(section => {
     if (section.getBoundingClientRect().top < innerHeight * 0.42) active = section.id;
@@ -125,6 +125,6 @@ function startNetworkCanvas(canvas, options = {}) {
 }
 if (!reduceMotion) {
   startNetworkCanvas(document.getElementById('bgCanvas'), { count: 46 });
-  startNetworkCanvas(document.getElementById('signalCanvas'), { count: 58 });
+  const sc = document.getElementById('signalCanvas'); if (sc) startNetworkCanvas(sc, { count: 58 });
 }
 

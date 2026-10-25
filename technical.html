@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khalil Khalil | Technology &amp; Security</title>
+<meta name="description" content="Modern portfolio for Khalil Khalil: design, photography, content creation, cybersecurity research, achievements, and contact links.">
+<meta name="theme-color" content="#050505">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body><canvas class="site-bg-canvas" id="bgCanvas" aria-hidden="true"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="nav"><div class="nav-inner">
+    <a class="brand" href="index.html" aria-label="Khalil Khalil home"><span class="brand-mark">K</span><span>Khalil Khalil</span></a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-controls="navLinks" aria-expanded="false"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <div class="nav-links" id="navLinks"><a href="index.html">&larr; Creative</a><a href="#research">Research</a><a href="#recognition">Recognition</a><a href="#projects">Projects</a><a class="nav-action" href="#contact">Contact</a></div></div></nav>
+<main>
+  <section class="hero tech-hero" id="home"><div class="container">
+    <span class="eyebrow reveal">Technology &amp; Security</span>
+    <h1 class="reveal">Security research <span class="serif">&amp; software projects.</span></h1>
+    <p class="hero-copy reveal">Computer Science student and independent researcher. I find and document vulnerabilities, work with digital forensics tools and build web projects. Security is a learning-focused track beside my design work.</p>
+    <div class="hero-actions reveal"><a class="btn btn-primary" href="https://wa.me/963960955844" target="_blank" rel="noopener">Contact me <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 5l7 7-7 7"/></svg></a><a class="btn" href="assets/Khalil_Khalil_CV_Technical.pdf" target="_blank" rel="noopener">Technical CV</a></div>
+  </div></section>
+  <section class="section" id="research"><div class="container">
+    <div class="section-head"><span class="eyebrow reveal">Vulnerability Research</span><h2 class="reveal">Findings, <span class="serif">documented.</span></h2><p class="section-desc reveal">Each finding is written up and reported responsibly, with proof attached.</p></div>
+    <div class="cases">
+    <article class="case reveal"><div class="case-media solo"><img src="assets/facebook.webp" alt="Race condition request diagram" loading="lazy"></div><div class="case-body"><span class="card-number">01 / RACE CONDITION</span><h3>Facebook: Race Condition Vulnerability</h3><dl class="story"><div><dt>Finding</dt><dd>A race condition in an email confirmation workflow.</dd></div><div><dt>What I did</dt><dd>Documented the issue and wrote a full technical report covering the exploit methodology and its impact.</dd></div><div><dt>Outcome</dt><dd>Highlighted by OffSec in March 2026.</dd></div></dl><a class="card-link" href="https://drive.google.com/drive/folders/1HXxHzGPUjzUS0UELDB2VLeCQS-KJ0T_A?usp=drive_link" target="_blank" rel="noopener">View proof <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article>
+    <article class="case reveal"><div class="case-media solo"><img src="assets/tiktok.webp" alt="Open redirect proof of concept" loading="lazy"></div><div class="case-body"><span class="card-number">02 / OPEN REDIRECT</span><h3>TikTok: Open Redirect Vulnerability</h3><dl class="story"><div><dt>Finding</dt><dd>An open redirect vulnerability on the platform.</dd></div><div><dt>What I did</dt><dd>Recorded a video proof of concept and documented how the redirect behaves.</dd></div></dl><a class="card-link" href="https://drive.google.com/drive/folders/1VuyMbpa0_QqTpSApIoMudfERDWdYarSr?usp=drive_link" target="_blank" rel="noopener">View proof <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article>
+    </div></div></section>
+  <section class="section" id="recognition"><div class="container">
+    <div class="section-head"><span class="eyebrow reveal">Recognition</span><h2 class="reveal">How I got <span class="serif">there.</span></h2><p class="section-desc reveal">Three results, with what I did to earn each one.</p></div>
+    <div class="cases">
+    <article class="case reveal"><div class="case-media solo"><img src="assets/offsec.webp" alt="OffSec highlight proof" loading="lazy"></div><div class="case-body"><span class="card-number">01 / OFFSEC</span><h3>Highlighted by OffSec</h3><dl class="story"><div><dt>Result</dt><dd>Race condition on a Meta platform highlighted by OffSec, March 2026.</dd></div><div><dt>How</dt><dd>It came from the research above: discovering the issue and documenting it.</dd></div></dl><a class="card-link" href="https://drive.google.com/drive/folders/1HXxHzGPUjzUS0UELDB2VLeCQS-KJ0T_A?usp=drive_link" target="_blank" rel="noopener">View proof <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article>
+    <article class="case reveal"><div class="case-media solo"><img src="assets/horizon.webp" alt="Horizon Lab ranking proof" loading="lazy"></div><div class="case-body"><span class="card-number">02 / HORIZON LAB</span><h3>#1 in Syria, #177 worldwide</h3><dl class="story"><div><dt>Result</dt><dd>First in Syria and 177th worldwide, with a 93% score in digital forensics.</dd></div><div><dt>How</dt><dd>I competed using Phoenix, the digital forensics tool I built, shown in the next section.</dd></div></dl><a class="card-link" href="https://drive.google.com/drive/folders/1fVV4dVbT0LvDbXnkb4AqCLJVFaOdKqos?usp=drive_link" target="_blank" rel="noopener">View proof <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article>
+    <article class="case reveal"><div class="case-media solo"><img src="assets/favikon.webp" alt="Favikon ranking proof" loading="lazy"></div><div class="case-body"><span class="card-number">03 / FAVIKON</span><h3>#1 cybersecurity creator in Syria</h3><dl class="story"><div><dt>Result</dt><dd>Ranked first in cybersecurity in Syria and in the Top 50 creators in the Arab world.</dd></div><div><dt>How</dt><dd>By publishing Arabic cybersecurity content and Linux training material that makes technical topics easier to follow.</dd></div></dl><a class="card-link" href="https://drive.google.com/drive/folders/1fVV4dVbT0LvDbXnkb4AqCLJVFaOdKqos?usp=drive_link" target="_blank" rel="noopener">View proof <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article>
+    </div></div></section>
+<section class="section studio" id="projects">
+    <div class="container">
+      <div class="studio-panel">
+        <div class="signal-box reveal">
+          <img class="signal-image" src="assets/phoenix.webp" alt="Phoenix local verification dashboard interface">
+          <canvas id="signalCanvas" aria-hidden="true"></canvas>
+          <div class="signal-label"><span>LIVE SIGNAL MAP</span><span>LOCAL ANALYSIS</span></div>
+        </div>
+        <div class="studio-copy">
+          <span class="eyebrow reveal">Featured Project</span>
+          <h2 class="reveal">Phoenix, a local <span class="serif">verification dashboard.</span></h2>
+          <p class="section-desc reveal">A tool that reads the structure of numbers and the signals linked to them, entirely on your own device: no tracking, no uploads, no judgment of people. It is the tool I used in the Horizon Lab competition.</p>
+          <a class="btn btn-primary reveal phoenix-btn" href="https://khalil-m-khalil.github.io/Phoenix/" target="_blank" rel="noopener">Explore Phoenix <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
+  <div class="container"><div class="cases" style="margin-top:26px"><article class="case reveal"><div class="case-media solo"><img src="assets/github.webp" alt="Code editor and commit graph" loading="lazy"></div><div class="case-body"><span class="card-number">MORE / WEB &amp; CODE</span><h3>GitHub projects</h3><p>Web projects, landing pages and security experiments, built with HTML, CSS and JavaScript.</p><a class="btn btn-primary" href="https://github.com/Khalil-M-Khalil" target="_blank" rel="noopener">Open GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article></div></div></section>
+
+    <section class="section" id="practice"><div class="container"><div class="section-head"><span class="eyebrow reveal">Hands-On Practice</span><h2 class="reveal">Currently <span class="serif">learning.</span></h2><p class="section-desc reveal">Tools I practise with on a dedicated Debian learning environment. This is a learning track, not professional SOC or forensics experience.</p></div>
+    <div class="tag-wall reveal"><span class="tag">Wireshark</span><span class="tag">tcpdump</span><span class="tag">Nmap</span><span class="tag">Autopsy</span><span class="tag">Sleuth Kit</span><span class="tag">Volatility 3</span><span class="tag">ExifTool</span><span class="tag">Debian Linux</span></div>
+    <p class="muted-line reveal">Also exploring: prompt engineering and IT business analysis.</p></div></section>
+  <section class="section" id="cv"><div class="container"><div class="cv-strip reveal"><div><h3>Technical CV</h3><p>Research, recognition and technical projects. A separate creative CV is on the creative page.</p></div><div class="cv-actions"><a class="btn" href="assets/Khalil_Khalil_CV_Technical.pdf" target="_blank" rel="noopener">View CV</a><a class="btn btn-primary" href="assets/Khalil_Khalil_CV_Technical.pdf" download="Khalil_Khalil_CV_Technical.pdf">Download CV</a></div></div></div></section>
+<section class="section" id="contact">
+    <div class="container">
+      <div class="contact-layout">
+        <div>
+          <span class="eyebrow reveal">Get In Touch</span>
+          <h2 class="reveal">Let's <span class="serif">connect.</span></h2>
+          <p class="contact-lead reveal">Have a project in mind, want to collaborate, or want to talk creative/security ideas? I work remotely across Syria, the Gulf, the wider Arab world, and internationally.</p>
+          <a class="email-link reveal" href="mailto:khalilmkhalil0937@gmail.com">khalilmkhalil0937@gmail.com</a>
+        </div>
+        <div class="contact-list">
+          <a class="contact-item reveal" href="https://www.instagram.com/khalil_m_khalil09/" target="_blank" rel="noopener"><span><span class="contact-platform">Instagram</span><span class="contact-handle">+963 960 955 8449</span></span><span>Open</span></a>
+          <a class="contact-item reveal" href="https://www.facebook.com/kkalil.khalil" target="_blank" rel="noopener"><span><span class="contact-platform">Facebook</span><span class="contact-handle">kkalil.khalil</span></span><span>Open</span></a>
+          <a class="contact-item reveal" href="https://wa.me/963960955844" target="_blank" rel="noopener"><span><span class="contact-platform">WhatsApp</span><span class="contact-handle">+963 960 955 844</span></span><span>Message</span></a>
+          <a class="contact-item reveal" href="https://github.com/Khalil-M-Khalil" target="_blank" rel="noopener"><span><span class="contact-platform">GitHub</span><span class="contact-handle">Khalil-M-Khalil</span></span><span>Open</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="container footer-inner"><b>Khalil Khalil</b><span><a href="index.html">&larr; Creative work</a> &nbsp;·&nbsp; © 2026</span></div></footer>
+<script src="js/main.js"></script>
+</body>
+</html>
