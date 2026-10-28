@@ -83,6 +83,30 @@
         </div>
       </div>
     </div>
+    <div class="container" id="sada">
+      <div class="studio-panel sada-panel">
+        <div class="signal-box sada-visual reveal">
+          <video class="sada-video" controls preload="metadata" poster="assets/sada/calibrating.webp" width="1024" height="576">
+            <source src="assets/sada/sada-demo.mp4" type="video/mp4">
+          </video>
+          <div class="signal-label"><span>WI-FI MOTION SENSING</span><span>SOFTWARE ONLY, LOCAL</span></div>
+        </div>
+        <div class="studio-copy">
+          <span class="eyebrow reveal">Concept &amp; Desktop Application</span>
+          <h2 class="reveal">Sada, sense motion from <span class="serif">Wi-Fi signal.</span></h2>
+          <p class="section-desc reveal">A Python tool that detects motion from the change in Wi-Fi signal strength between a phone hotspot and a laptop. No extra hardware, no accounts, no cloud. Everything stays on your machine.</p>
+          <dl class="story reveal"><div><dt>How it measures</dt><dd>The laptop reads signal strength every ~0.5 s. After a 15-second calibration of the still room, it compares current fluctuation with the calm baseline. Three readings in a row above the threshold means motion.</dd></div><div><dt>Zone estimation</dt><dd>You train three zones (near phone, middle, near laptop). Sada stores a fingerprint of each and classifies new motion by the closest match, then measures its own accuracy and says &#x201c;not reliable&#x201d; when it cannot tell.</dd></div><div><dt>Privacy by design</dt><dd>The server listens on localhost only and rejects requests from other pages. No tracking, no uploads.</dd></div></dl>
+          <div class="sada-gallery reveal">
+            <figure><img src="assets/sada/calibrating-sm.webp" srcset="assets/sada/calibrating-sm.webp 512w, assets/sada/calibrating.webp 1024w" sizes="(max-width:660px) calc(50vw - 24px), 220px" alt="Sada calibrating – recording room quiet" width="1024" height="576" loading="lazy"><figcaption>Calibrating the quiet room</figcaption></figure>
+            <figure><img src="assets/sada/quiet-sm.webp" srcset="assets/sada/quiet-sm.webp 512w, assets/sada/quiet.webp 1024w" sizes="(max-width:660px) calc(50vw - 24px), 220px" alt="Sada monitoring – room is quiet" width="1024" height="576" loading="lazy"><figcaption>Room quiet, protection active</figcaption></figure>
+            <figure><img src="assets/sada/mild-sm.webp" srcset="assets/sada/mild-sm.webp 512w, assets/sada/mild.webp 1024w" sizes="(max-width:660px) calc(50vw - 24px), 220px" alt="Sada detecting mild change" width="1024" height="576" loading="lazy"><figcaption>Mild change detected</figcaption></figure>
+            <figure><img src="assets/sada/motion-sm.webp" srcset="assets/sada/motion-sm.webp 512w, assets/sada/motion.webp 1024w" sizes="(max-width:660px) calc(50vw - 24px), 220px" alt="Sada motion alert – near phone zone" width="1024" height="576" loading="lazy"><figcaption>Motion detected near phone</figcaption></figure>
+          </div>
+          <div class="tag-wall reveal"><span class="tag">Python</span><span class="tag">Wi-Fi RSSI</span><span class="tag">WebGL / 3-D</span><span class="tag">Localhost Server</span><span class="tag">SQLite</span><span class="tag">Windows</span></div>
+          <a class="btn btn-primary reveal sada-btn" href="https://github.com/Khalil-M-Khalil/Sada" target="_blank" rel="noopener">View on GitHub <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </div>
   <div class="container"><div class="cases" style="margin-top:26px"><article class="case reveal"><div class="case-media solo"><img src="assets/github.webp" alt="Code editor and commit graph" loading="lazy"></div><div class="case-body"><span class="card-number">MORE / WEB &amp; CODE</span><h3>GitHub projects</h3><p>Web projects, landing pages and security experiments, built with HTML, CSS and JavaScript.</p><a class="btn btn-primary" href="https://github.com/Khalil-M-Khalil" target="_blank" rel="noopener">Open GitHub <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17 17 7M7 7h10v10"/></svg></a></div></article></div></div></section>
 
     <section class="section" id="practice"><div class="container"><div class="section-head"><span class="eyebrow reveal">Hands-On Practice</span><h2 class="reveal">Currently <span class="serif">learning.</span></h2><p class="section-desc reveal">Tools I practise with on a dedicated Debian learning environment. This is a learning track, not professional SOC or forensics experience.</p></div>

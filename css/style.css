@@ -901,3 +901,13 @@ footer {
 .nabra-window-foot{display:flex;justify-content:space-between;gap:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);color:var(--muted);font-size:.6rem;font-weight:700;letter-spacing:.1em}
 .nabra-btn{display:inline-flex;margin-top:8px}
 @media(max-width:660px){.signal-box.nabra-visual{min-height:420px;aspect-ratio:auto;padding:22px}.nabra-window{padding:16px}.nabra-window-foot{font-size:.54rem}}
+/* ===== Sada ===== */
+.sada-panel{margin-top:48px}
+.sada-visual{display:grid;place-items:center;padding:0;min-height:0;overflow:hidden;background:#0b1322}
+.sada-video{width:100%;height:auto;display:block;border-radius:0}
+.sada-gallery{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 16px}
+.sada-gallery figure{margin:0}
+.sada-gallery img{width:100%;border-radius:6px;border:1px solid rgba(214,168,63,.14)}
+.sada-gallery figcaption{margin-top:6px;color:var(--muted);font-size:.78rem;font-weight:600}
+.sada-btn{display:inline-flex;margin-top:8px}
+@media(max-width:660px){.sada-gallery{grid-template-columns:1fr 1fr}.sada-visual{aspect-ratio:auto;min-height:0}.signal-box.sada-visual{min-height:0;aspect-ratio:16/9}}
