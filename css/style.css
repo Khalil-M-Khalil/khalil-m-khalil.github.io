@@ -910,5 +910,5 @@ footer {
 .sada-gallery img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block;border-radius:6px;border:1px solid rgba(214,168,63,.16);background:#0b1322;transition:transform .25s ease,border-color .25s ease}
 .sada-gallery figure:hover img{transform:translateY(-2px);border-color:rgba(242,212,125,.45)}
 .sada-gallery figcaption{margin-top:6px;color:var(--muted);font-size:.78rem;font-weight:600;line-height:1.4}
-.sada-btn{display:inline-flex;margin-top:8px}
-@media(max-width:660px){.sada-panel{margin-top:32px}.signal-box.sada-visual{width:100%;min-height:0;aspect-ratio:16/9}.sada-gallery{grid-template-columns:1fr 1fr;gap:10px}.sada-gallery figcaption{font-size:.72rem}}
+.sada-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
+@media(max-width:660px){.sada-panel{margin-top:32px}.signal-box.sada-visual{width:100%;min-height:0;aspect-ratio:16/9}.sada-gallery{grid-template-columns:1fr 1fr;gap:10px}.sada-gallery figcaption{font-size:.72rem}.sada-actions{flex-direction:column;align-items:stretch}}
