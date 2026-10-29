@@ -948,3 +948,18 @@ footer {
 @media(max-width:1100px){.testimonial-proofs-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:660px){.testimonial-proofs-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.testimonial-proof-body{padding:10px}.testimonial-proof-body h4{font-size:.84rem}.testimonial-proof-body p{font-size:.72rem}.testimonial-proof-expand{font-size:.6rem;padding:3px 6px}}
 @media(max-width:400px){.testimonial-proofs-grid{grid-template-columns:1fr}}
+/* ===== Motion Design ===== */
+.motion-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.motion-card{display:flex;flex-direction:column;border:1px solid rgba(214,168,63,.17);border-radius:var(--radius);background:rgba(255,255,255,.035);padding:18px;transition:transform .28s ease,border-color .28s ease,background .28s ease}
+.motion-card:hover{transform:translateY(-5px);border-color:rgba(242,212,125,.4);background:rgba(255,255,255,.055)}
+.motion-media{width:100%;aspect-ratio:9/15;border-radius:calc(var(--radius) - 2px);overflow:hidden;background:#08090a;border:1px solid rgba(255,255,255,.08);margin-bottom:16px;display:flex;align-items:center;justify-content:center}
+.motion-media video{width:100%;height:100%;object-fit:cover;display:block}
+.motion-card.landscape .motion-media video{object-fit:contain;background:#050608}
+.motion-body{display:flex;flex-direction:column;flex:1}
+.motion-body .card-number{font-size:.7rem;letter-spacing:.12em;color:var(--gold-2);font-weight:700;margin-bottom:6px;display:block}
+.motion-body h3{font-size:1.15rem;color:var(--text);margin:0 0 8px}
+.motion-body p{color:var(--muted);line-height:1.55;font-size:.86rem;margin:0 0 14px;flex:1}
+.motion-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}
+.motion-tags .tag{font-size:.68rem;padding:3px 8px;border-radius:999px;border:1px solid rgba(214,168,63,.2);background:rgba(214,168,63,.05);color:var(--gold-2)}
+@media(max-width:1100px){.motion-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}}
+@media(max-width:600px){.motion-grid{grid-template-columns:1fr;gap:16px}.motion-media{max-width:280px;margin:0 auto 16px}}
