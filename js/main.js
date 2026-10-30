@@ -50,6 +50,22 @@ if (reveals.length > 0 && 'IntersectionObserver' in window) {
   reveals.forEach(el => el.classList.add('visible'));
 }
 
+/* Dynamic Staggered Scroll-triggered Entrance for Landing Choice Cards */
+const choiceCards = document.querySelectorAll('.landing-choice-card');
+if (choiceCards.length > 0 && 'IntersectionObserver' in window) {
+  const choiceObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        choiceObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.16, rootMargin: '0px 0px -40px 0px' });
+  choiceCards.forEach(card => choiceObserver.observe(card));
+} else {
+  choiceCards.forEach(card => card.classList.add('revealed'));
+}
+
 const scrollProgress = document.getElementById('scrollProgress');
 const timelinePercent = document.getElementById('timelinePercent');
 const sections = [...document.querySelectorAll('main section[id]')];
@@ -78,7 +94,9 @@ if (!reduceMotion) {
       const r = card.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - .5;
       const y = (e.clientY - r.top) / r.height - .5;
-      card.style.transform = `translateY(-4px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg)`;
+      card.style.setProperty('--mouse-x', `${e.clientX - r.left}px`);
+      card.style.setProperty('--mouse-y', `${e.clientY - r.top}px`);
+      card.style.transform = `translateY(-6px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
     });
     card.addEventListener('mouseleave', () => card.style.transform = '');
   });
