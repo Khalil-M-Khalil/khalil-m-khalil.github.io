@@ -157,4 +157,6 @@ if (!reduceMotion) {
   if (bg) startNetworkCanvas(bg, { count: 46 });
   const sc = document.getElementById('signalCanvas');
   if (sc) startNetworkCanvas(sc, { count: 58 });
+  const tc = document.getElementById('terminalCanvas');
+  if (tc) startNetworkCanvas(tc, { count: 32 });
 }
