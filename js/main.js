@@ -1,24 +1,25 @@
-
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const navLinks = document.getElementById('navLinks');
 const menuBtn = document.getElementById('menuBtn');
-menuBtn.addEventListener('click', () => {
-  const open = navLinks.classList.toggle('open');
-  menuBtn.setAttribute('aria-expanded', String(open));
-});
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-  navLinks.classList.remove('open');
-  menuBtn.setAttribute('aria-expanded', 'false');
-}));
+if (menuBtn && navLinks) {
+  menuBtn.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', String(open));
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    menuBtn.setAttribute('aria-expanded', 'false');
+  }));
+}
 
 const cursor = document.getElementById('cursor');
 const cursorRing = document.getElementById('cursorRing');
 let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-if (!reduceMotion && matchMedia('(pointer:fine)').matches) {
+if (!reduceMotion && matchMedia('(pointer:fine)').matches && cursor && cursorRing) {
   window.addEventListener('mousemove', e => {
     mouseX = e.clientX; mouseY = e.clientY;
-    cursor.style.opacity = 1; cursorRing.style.opacity = 1;
+    cursor.style.opacity = '1'; cursorRing.style.opacity = '1';
     cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
   });
   const follow = () => {
@@ -35,15 +36,19 @@ if (!reduceMotion && matchMedia('(pointer:fine)').matches) {
 }
 
 const reveals = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.14 });
-reveals.forEach(el => revealObserver.observe(el));
+if (reveals.length > 0 && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.14 });
+  reveals.forEach(el => revealObserver.observe(el));
+} else {
+  reveals.forEach(el => el.classList.add('visible'));
+}
 
 const scrollProgress = document.getElementById('scrollProgress');
 const timelinePercent = document.getElementById('timelinePercent');
@@ -52,8 +57,12 @@ const navItems = [...document.querySelectorAll('.nav-links a')];
 function onScroll() {
   const max = document.documentElement.scrollHeight - innerHeight;
   const progress = max > 0 ? scrollY / max : 0;
-  scrollProgress.style.width = `${progress * 100}%`;
-  if (timelinePercent) timelinePercent.textContent = `${String(Math.round(progress * 100)).padStart(2, '0')}%`;
+  if (scrollProgress) {
+    scrollProgress.style.width = `${progress * 100}%`;
+  }
+  if (timelinePercent) {
+    timelinePercent.textContent = `${String(Math.round(progress * 100)).padStart(2, '0')}%`;
+  }
   let active = sections[0]?.id;
   sections.forEach(section => {
     if (section.getBoundingClientRect().top < innerHeight * 0.42) active = section.id;
@@ -76,7 +85,9 @@ if (!reduceMotion) {
 }
 
 function startNetworkCanvas(canvas, options = {}) {
+  if (!canvas || !canvas.getContext) return;
   const ctx = canvas.getContext('2d');
+  if (!ctx) return;
   let w = 0, h = 0, points = [];
   const count = options.count || 70;
   function resize() {
@@ -124,7 +135,8 @@ function startNetworkCanvas(canvas, options = {}) {
   frame();
 }
 if (!reduceMotion) {
-  startNetworkCanvas(document.getElementById('bgCanvas'), { count: 46 });
-  const sc = document.getElementById('signalCanvas'); if (sc) startNetworkCanvas(sc, { count: 58 });
+  const bg = document.getElementById('bgCanvas');
+  if (bg) startNetworkCanvas(bg, { count: 46 });
+  const sc = document.getElementById('signalCanvas');
+  if (sc) startNetworkCanvas(sc, { count: 58 });
 }
-
