@@ -1593,3 +1593,13 @@ footer {
   text-decoration: underline;
   color: #fff;
 }
+.motion-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 10px;
+}
+.motion-links .card-link {
+  margin-top: 0;
+}
