@@ -1129,7 +1129,7 @@ footer {
 @media(max-width:660px){.testimonial-proofs-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.testimonial-proof-body{padding:10px}.testimonial-proof-body h4{font-size:.84rem}.testimonial-proof-body p{font-size:.72rem}.testimonial-proof-expand{font-size:.6rem;padding:3px 6px}}
 @media(max-width:400px){.testimonial-proofs-grid{grid-template-columns:1fr}}
 /* ===== Motion Design ===== */
-.motion-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
+.motion-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .motion-card{display:flex;flex-direction:column;border:1px solid rgba(214,168,63,.17);border-radius:var(--radius);background:rgba(255,255,255,.035);padding:18px;transition:transform .28s ease,border-color .28s ease,background .28s ease}
 .motion-card:hover{transform:translateY(-5px);border-color:rgba(242,212,125,.4);background:rgba(255,255,255,.055)}
 .motion-media{width:100%;aspect-ratio:9/15;border-radius:calc(var(--radius) - 2px);overflow:hidden;background:#08090a;border:1px solid rgba(255,255,255,.08);margin-bottom:16px;display:flex;align-items:center;justify-content:center}
@@ -1574,4 +1574,22 @@ footer {
   .proto-item {
     padding: 12px;
   }
+}
+
+.motion-body .card-link {
+  position: static;
+  left: auto;
+  bottom: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .82rem;
+  margin-top: 10px;
+  color: var(--gold-2);
+  font-weight: 700;
+  text-decoration: none;
+}
+.motion-body .card-link:hover {
+  text-decoration: underline;
+  color: #fff;
 }
