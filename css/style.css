@@ -2149,6 +2149,16 @@ footer {
   transform: translateY(-2px);
 }
 
+.film-btn-ar {
+  background: rgba(214, 168, 63, 0.08);
+  border: 1px solid rgba(214, 168, 63, 0.28);
+  color: var(--gold-2);
+}
+.film-btn-ar:hover {
+  background: rgba(214, 168, 63, 0.18);
+  border-color: var(--gold-2);
+  color: #fff;
+}
 .film-btn-novel {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(214, 168, 63, 0.3);
