@@ -710,6 +710,30 @@ footer {
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 
+@media (max-width: 1180px) {
+  .nav-inner { padding: 14px 18px; gap: 10px; }
+  .nav-links { gap: 2px; }
+  .nav-links a { padding: 8px 9px; font-size: .82rem; }
+}
+@media (max-width: 1040px) {
+  .menu-btn { display: grid; place-items: center; }
+  .nav-links {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    top: 76px;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+    background: rgba(5,5,5,0.96);
+    border: 1px solid rgba(214,168,63,0.22);
+    border-radius: var(--radius);
+  }
+  .nav-links.open { display: flex; }
+  .nav-links a { border-radius: 6px; }
+}
+
 @media (max-width: 980px) {
   .hero { padding-top: 112px; }
   .hero-grid, .about-layout, .studio-panel, .contact-layout { grid-template-columns: 1fr; }
