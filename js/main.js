@@ -160,3 +160,126 @@ if (!reduceMotion) {
   const tc = document.getElementById('terminalCanvas');
   if (tc) startNetworkCanvas(tc, { count: 32 });
 }
+
+/* ===== Photography Filtering & Lightbox ===== */
+const photoGallery = document.getElementById('photoGallery');
+if (photoGallery) {
+  const filterBtns = document.querySelectorAll('.photo-filter-btn');
+  const photoCards = Array.from(photoGallery.querySelectorAll('.photo-card'));
+  
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      
+      const filter = btn.getAttribute('data-filter');
+      photoCards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  const lightbox = document.getElementById('photoLightbox');
+  const lightboxImg = document.getElementById('lightboxImg');
+  const lightboxTag = document.getElementById('lightboxTag');
+  const lightboxTitle = document.getElementById('lightboxTitle');
+  const lightboxDesc = document.getElementById('lightboxDesc');
+  const lightboxClose = document.getElementById('lightboxClose');
+  const lightboxOverlay = document.getElementById('lightboxOverlay');
+  const lightboxPrev = document.getElementById('lightboxPrev');
+  const lightboxNext = document.getElementById('lightboxNext');
+
+  let currentIdx = 0;
+  function getVisibleCards() {
+    return photoCards.filter(c => !c.classList.contains('hidden'));
+  }
+
+  function openLightbox(index) {
+    const visible = getVisibleCards();
+    if (index < 0 || index >= visible.length) return;
+    currentIdx = index;
+    const card = visible[currentIdx];
+    const img = card.querySelector('img');
+    const badge = card.querySelector('.photo-card-badge');
+    const title = card.querySelector('.photo-card-body h3');
+    const desc = card.querySelector('.photo-card-body p');
+
+    if (lightboxImg && img) {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt || '';
+    }
+    if (lightboxTag && badge) lightboxTag.textContent = badge.textContent;
+    if (lightboxTitle && title) lightboxTitle.textContent = title.textContent;
+    if (lightboxDesc && desc) lightboxDesc.textContent = desc.textContent;
+
+    if (lightbox) {
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeLightbox() {
+    if (lightbox) {
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+  }
+
+  photoCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const visible = getVisibleCards();
+      const idx = visible.indexOf(card);
+      if (idx !== -1) openLightbox(idx);
+    });
+  });
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightboxOverlay) lightboxOverlay.addEventListener('click', closeLightbox);
+
+  if (lightboxPrev) {
+    lightboxPrev.addEventListener('click', e => {
+      e.stopPropagation();
+      const visible = getVisibleCards();
+      if (visible.length === 0) return;
+      currentIdx = (currentIdx - 1 + visible.length) % visible.length;
+      openLightbox(currentIdx);
+    });
+  }
+
+  if (lightboxNext) {
+    lightboxNext.addEventListener('click', e => {
+      e.stopPropagation();
+      const visible = getVisibleCards();
+      if (visible.length === 0) return;
+      currentIdx = (currentIdx + 1) % visible.length;
+      openLightbox(currentIdx);
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!lightbox || !lightbox.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    else if (e.key === 'ArrowLeft') {
+      const visible = getVisibleCards();
+      if (visible.length === 0) return;
+      currentIdx = (currentIdx - 1 + visible.length) % visible.length;
+      openLightbox(currentIdx);
+    } else if (e.key === 'ArrowRight') {
+      const visible = getVisibleCards();
+      if (visible.length === 0) return;
+      currentIdx = (currentIdx + 1) % visible.length;
+      openLightbox(currentIdx);
+    }
+  });
+}
