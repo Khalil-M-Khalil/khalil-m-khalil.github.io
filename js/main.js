@@ -283,3 +283,99 @@ if (photoGallery) {
     }
   });
 }
+
+// Security Triage Modal Handler
+const triageModal = document.getElementById('triageModal');
+if (triageModal) {
+  const closeBtn = document.getElementById('triageCloseBtn');
+  const backdrop = document.getElementById('triageBackdrop');
+  const sendWhatsapp = document.getElementById('triageSendWhatsapp');
+  const sendEmail = document.getElementById('triageSendEmail');
+
+  const openModal = () => {
+    triageModal.classList.add('active');
+    triageModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    const msg = document.getElementById('triageMessage');
+    if (msg) setTimeout(() => msg.focus(), 150);
+  };
+
+  const closeModal = () => {
+    triageModal.classList.remove('active');
+    triageModal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll('.btn-open-triage').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      openModal();
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (backdrop) backdrop.addEventListener('click', closeModal);
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && triageModal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  const getTriageData = () => {
+    const category = document.getElementById('triageCategory')?.value || 'General Security Consultation';
+    const message = document.getElementById('triageMessage')?.value.trim();
+    const name = document.getElementById('triageName')?.value.trim() || 'Anonymous';
+    const urgency = document.getElementById('triageUrgency')?.value || 'Standard';
+    return { category, message, name, urgency };
+  };
+
+  if (sendWhatsapp) {
+    sendWhatsapp.addEventListener('click', () => {
+      const data = getTriageData();
+      if (!data.message) {
+        const textarea = document.getElementById('triageMessage');
+        if (textarea) {
+          textarea.focus();
+          textarea.style.borderColor = 'var(--gold-2)';
+          setTimeout(() => { textarea.style.borderColor = ''; }, 2000);
+        }
+        return;
+      }
+      const fullText = `*Security Assessment Request*\n` +
+        `• *Name/Handle:* ${data.name}\n` +
+        `• *Urgency:* ${data.urgency}\n` +
+        `• *Category:* ${data.category}\n\n` +
+        `*Case Details / شرح الحالة:*\n${data.message}`;
+
+      const waUrl = `https://wa.me/963960955844?text=${encodeURIComponent(fullText)}`;
+      window.open(waUrl, '_blank');
+      closeModal();
+    });
+  }
+
+  if (sendEmail) {
+    sendEmail.addEventListener('click', () => {
+      const data = getTriageData();
+      if (!data.message) {
+        const textarea = document.getElementById('triageMessage');
+        if (textarea) {
+          textarea.focus();
+          textarea.style.borderColor = 'var(--gold-2)';
+          setTimeout(() => { textarea.style.borderColor = ''; }, 2000);
+        }
+        return;
+      }
+      const subject = `Security Assessment: ${data.category}`;
+      const body = `Security Assessment Request\n` +
+        `Name/Handle: ${data.name}\n` +
+        `Urgency: ${data.urgency}\n` +
+        `Category: ${data.category}\n\n` +
+        `Case Details:\n${data.message}`;
+
+      const mailtoUrl = `mailto:khalilmkhalil0937@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+      closeModal();
+    });
+  }
+}

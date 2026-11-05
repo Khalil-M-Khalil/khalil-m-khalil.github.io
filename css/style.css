@@ -2238,21 +2238,21 @@ footer {
 }
 
 /* ==========================================================================
-   Security Assessment & Consultation Section
+   Security Assessment & Consultation Section (Golden Unified Theme)
    ========================================================================== */
 .tech-assessment-section {
-  padding: 40px 0 30px;
+  padding: 50px 0 30px;
 }
 
 .tech-assessment-card {
   position: relative;
-  background: radial-gradient(circle at 10% 15%, rgba(56, 189, 248, 0.08), transparent 45%),
-              radial-gradient(circle at 90% 85%, rgba(214, 168, 63, 0.06), transparent 45%),
-              rgba(10, 13, 18, 0.95);
-  border: 1px solid rgba(56, 189, 248, 0.25);
+  background: radial-gradient(circle at 10% 15%, rgba(214, 168, 63, 0.08), transparent 45%),
+              radial-gradient(circle at 90% 85%, rgba(214, 168, 63, 0.05), transparent 45%),
+              rgba(10, 12, 16, 0.96);
+  border: 1px solid rgba(214, 168, 63, 0.28);
   border-radius: var(--radius);
   padding: 44px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(214, 168, 63, 0.15);
   overflow: hidden;
 }
 
@@ -2260,9 +2260,9 @@ footer {
   position: absolute;
   top: -100px;
   right: -100px;
-  width: 300px;
-  height: 300px;
-  background: radial-gradient(circle, rgba(56, 189, 248, 0.15), transparent 70%);
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(214, 168, 63, 0.14), transparent 70%);
   pointer-events: none;
 }
 
@@ -2276,13 +2276,13 @@ footer {
   align-items: center;
   gap: 7px;
   padding: 4px 12px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: rgba(214, 168, 63, 0.1);
+  border: 1px solid rgba(214, 168, 63, 0.32);
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.12em;
-  color: #38bdf8;
+  color: var(--gold-2);
   text-transform: uppercase;
   margin-bottom: 14px;
 }
@@ -2299,7 +2299,7 @@ footer {
   font-family: 'Playfair Display', Georgia, serif;
   font-style: italic;
   font-weight: 700;
-  color: #38bdf8;
+  color: var(--gold-2);
 }
 
 .assessment-desc {
@@ -2321,13 +2321,13 @@ footer {
   gap: 18px;
   padding: 24px;
   background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(214, 168, 63, 0.18);
   border-radius: 12px;
   transition: border-color 0.25s, transform 0.25s;
 }
 
 .assessment-pillar:hover {
-  border-color: rgba(56, 189, 248, 0.38);
+  border-color: rgba(214, 168, 63, 0.45);
   transform: translateY(-2px);
 }
 
@@ -2336,9 +2336,9 @@ footer {
   height: 44px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: rgba(56, 189, 248, 0.1);
-  border: 1px solid rgba(56, 189, 248, 0.25);
-  color: #38bdf8;
+  background: rgba(214, 168, 63, 0.1);
+  border: 1px solid rgba(214, 168, 63, 0.3);
+  color: var(--gold-2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2377,7 +2377,7 @@ footer {
 }
 
 .pillar-list li svg {
-  color: #38bdf8;
+  color: var(--gold-2);
   flex-shrink: 0;
 }
 
@@ -2403,8 +2403,8 @@ footer {
   width: 9px;
   height: 9px;
   border-radius: 50%;
-  background: #38bdf8;
-  box-shadow: 0 0 10px #38bdf8;
+  background: var(--gold-2);
+  box-shadow: 0 0 10px var(--gold-2);
   flex-shrink: 0;
 }
 
@@ -2418,4 +2418,210 @@ footer {
   .assessment-grid { grid-template-columns: 1fr; }
   .tech-assessment-card { padding: 26px; }
   .assessment-cta-strip { flex-direction: column; align-items: flex-start; }
+}
+
+/* ==========================================================================
+   Triage Intake Modal Dialog
+   ========================================================================== */
+.triage-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.triage-modal.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.triage-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(3, 4, 7, 0.85);
+  backdrop-filter: blur(8px);
+}
+
+.triage-modal-dialog {
+  position: relative;
+  width: 100%;
+  max-width: 620px;
+  background: #0d1017;
+  border: 1px solid rgba(214, 168, 63, 0.35);
+  border-radius: 16px;
+  padding: 32px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.85), 0 0 40px rgba(214, 168, 63, 0.08);
+  z-index: 10;
+  transform: translateY(20px) scale(0.98);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.triage-modal.active .triage-modal-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.triage-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  background: transparent;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.2s;
+}
+
+.triage-close-btn:hover {
+  color: #fff;
+}
+
+.triage-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+  background: rgba(214, 168, 63, 0.12);
+  border: 1px solid rgba(214, 168, 63, 0.3);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+}
+
+.triage-modal-head h3 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 6px;
+}
+
+.triage-modal-head p {
+  font-size: 0.86rem;
+  line-height: 1.55;
+  color: var(--muted);
+  margin: 0 0 20px;
+}
+
+.form-row {
+  margin-bottom: 14px;
+}
+
+.form-row label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #cbd5e1;
+  margin-bottom: 6px;
+}
+
+.triage-select-wrap select, .form-row input, .form-row select, .form-row textarea {
+  width: 100%;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.88rem;
+  outline: none;
+  box-sizing: border-box;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.triage-select-wrap select:focus, .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+  border-color: var(--gold-2);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.form-row textarea {
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.6;
+}
+
+.form-row-duo {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 12px;
+}
+
+.triage-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.triage-btn-submit {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px 18px;
+  background: var(--gold-2);
+  color: #050505;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+  font-size: 0.88rem;
+  transition: transform 0.2s, filter 0.2s;
+}
+
+.triage-btn-submit:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.triage-btn-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 16px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.86rem;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.triage-btn-email:hover {
+  border-color: var(--gold-2);
+  color: #fff;
+}
+
+.triage-privacy-notice {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.74rem;
+  color: var(--muted);
+  margin-top: 14px;
+}
+
+@media (max-width: 580px) {
+  .form-row-duo { grid-template-columns: 1fr; }
+  .triage-modal-dialog { padding: 22px; }
+  .triage-actions { flex-direction: column; }
+  .triage-btn-submit, .triage-btn-email { width: 100%; justify-content: center; }
 }
