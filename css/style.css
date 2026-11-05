@@ -2625,3 +2625,61 @@ footer {
   .triage-actions { flex-direction: column; }
   .triage-btn-submit, .triage-btn-email { width: 100%; justify-content: center; }
 }
+
+/* Category Chips */
+.category-chips {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.chip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 10px 12px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.chip-btn.full-span {
+  grid-column: span 2;
+}
+
+.chip-btn:hover {
+  background: rgba(214, 168, 63, 0.08);
+  border-color: rgba(214, 168, 63, 0.3);
+  color: #fff;
+}
+
+.chip-btn.active {
+  background: rgba(214, 168, 63, 0.14);
+  border-color: var(--gold-2);
+  color: #f5c563;
+  font-weight: 600;
+  box-shadow: 0 0 14px rgba(214, 168, 63, 0.12);
+}
+
+/* Enforce dark dropdown menus in Windows Chromium */
+.triage-modal select, .triage-modal option {
+  color-scheme: dark !important;
+  background-color: #121622 !important;
+  color: #f1f5f9 !important;
+}
+
+@media (max-width: 580px) {
+  .category-chips {
+    grid-template-columns: 1fr;
+  }
+  .chip-btn.full-span {
+    grid-column: span 1;
+  }
+}

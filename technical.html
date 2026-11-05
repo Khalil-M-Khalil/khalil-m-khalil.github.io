@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=20261105f">
+<link rel="stylesheet" href="css/style.css?v=20261105g">
 </head>
 <body><canvas class="site-bg-canvas" id="bgCanvas" aria-hidden="true"></canvas>
 <div class="cursor" id="cursor"></div>
@@ -511,15 +511,14 @@
 
       <form class="triage-form" id="triageForm" onsubmit="event.preventDefault();">
         <div class="form-row">
-          <label for="triageCategory">Incident / Request Category</label>
-          <div class="triage-select-wrap">
-            <select id="triageCategory">
-              <option value="Compromised or Restricted Account (حساب مخترق أو مقيد / حظر)">🚨 Compromised or Restricted Account (حساب مخترق / مقيد / حظر)</option>
-              <option value="Impersonation or Fake Account Takedown (انتحال شخصية / إزالة حساب مزور)">🛡️ Impersonation or Fake Account Takedown (انتحال شخصية / إزالة حساب مزور)</option>
-              <option value="Digital Extortion or Privacy Threat (ابتزاز رقمي / تهديد خصوصية)">⚠️ Digital Extortion or Privacy Threat (ابتزاز رقمي / تهديد خصوصية)</option>
-              <option value="Website or App Security Audit (فحص وتدقيق أمان موقع أو متجر)">🔒 Website or App Security Audit (فحص وتدقيق أمان موقع أو متجر)</option>
-              <option value="General Security Consultation (استشارة أمنية عامة)">💬 General Security Consultation (استشارة أمنية عامة)</option>
-            </select>
+          <label>Select Incident / Request Category (اختر نوع الحالة)</label>
+          <input type="hidden" id="triageCategory" value="Compromised or Restricted Account (حساب مخترق أو مقيد / حظر)">
+          <div class="category-chips" id="categoryChips">
+            <button type="button" class="chip-btn active" data-val="Compromised or Restricted Account (حساب مخترق أو مقيد / حظر)">🚨 حساب مخترق أو مقيد (Compromised)</button>
+            <button type="button" class="chip-btn" data-val="Impersonation or Fake Account Takedown (انتحال شخصية / إزالة حساب مزور)">🛡️ انتحال شخصية (Fake Account)</button>
+            <button type="button" class="chip-btn" data-val="Digital Extortion or Privacy Threat (ابتزاز رقمي / تهديد خصوصية)">⚠️ ابتزاز رقمي أو تهديد (Extortion)</button>
+            <button type="button" class="chip-btn" data-val="Website or App Security Audit (فحص وتدقيق أمان موقع أو متجر)">🔒 فحص أمان موقع / متجر (Audit)</button>
+            <button type="button" class="chip-btn full-span" data-val="General Security Consultation (استشارة أمنية عامة)">💬 استشارة أمنية عامة (General Security Inquiry)</button>
           </div>
         </div>
 
@@ -563,6 +562,6 @@
 
 </main>
 <footer><div class="container footer-inner"><b>Khalil Khalil</b><span><a href="design.html">&larr; Design work</a> &nbsp;·&nbsp; © 2026</span></div></footer>
-<script src="js/main.js?v=20261105f"></script>
+<script src="js/main.js?v=20261105g"></script>
 </body>
 </html>

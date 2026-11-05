@@ -322,6 +322,20 @@ if (triageModal) {
     }
   });
 
+  
+  // Category Chips Selection Handler
+  const chips = document.querySelectorAll('.chip-btn');
+  const catInput = document.getElementById('triageCategory');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      if (catInput) {
+        catInput.value = chip.getAttribute('data-val') || chip.textContent.trim();
+      }
+    });
+  });
+
   const getTriageData = () => {
     const category = document.getElementById('triageCategory')?.value || 'General Security Consultation';
     const message = document.getElementById('triageMessage')?.value.trim();
