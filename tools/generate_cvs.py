@@ -1,14 +1,12 @@
 from pathlib import Path
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_LEFT
 from reportlab.lib.pagesizes import A4
-from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
+from reportlab.lib.styles import ParagraphStyle
 from reportlab.lib.units import mm
 from reportlab.platypus import (
     BaseDocTemplate, Frame, PageTemplate, Paragraph, Spacer, Table, TableStyle,
-    KeepTogether, HRFlowable, PageBreak
+    KeepTogether, HRFlowable
 )
-from reportlab.pdfbase.pdfmetrics import stringWidth
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "assets"
@@ -18,10 +16,10 @@ INK = colors.HexColor("#171717")
 MUTED = colors.HexColor("#5d5d5d")
 LIGHT = colors.HexColor("#e4d19a")
 PAGE_W, PAGE_H = A4
-LEFT = 18 * mm
-RIGHT = 18 * mm
-TOP = 15 * mm
-BOTTOM = 14 * mm
+LEFT = 16 * mm
+RIGHT = 16 * mm
+TOP = 13 * mm
+BOTTOM = 12 * mm
 CONTENT_W = PAGE_W - LEFT - RIGHT
 
 
@@ -35,17 +33,17 @@ def link(text, url):
 
 def make_styles():
     return {
-        "name": ParagraphStyle("Name", fontName="Helvetica-Bold", fontSize=25, leading=27, textColor=INK, spaceAfter=2),
-        "headline": ParagraphStyle("Headline", fontName="Helvetica-Bold", fontSize=9.7, leading=12, textColor=GOLD, spaceAfter=3),
-        "contact": ParagraphStyle("Contact", fontName="Helvetica", fontSize=8.1, leading=10.2, textColor=MUTED, spaceAfter=8),
-        "section": ParagraphStyle("Section", fontName="Helvetica-Bold", fontSize=9.2, leading=11, textColor=GOLD, spaceBefore=7, spaceAfter=3, uppercase=True),
-        "body": ParagraphStyle("Body", fontName="Helvetica", fontSize=8.8, leading=11.3, textColor=INK, spaceAfter=2),
-        "muted": ParagraphStyle("Muted", fontName="Helvetica", fontSize=8.25, leading=10.7, textColor=MUTED, spaceAfter=1),
-        "role": ParagraphStyle("Role", fontName="Helvetica-Bold", fontSize=9.1, leading=11, textColor=INK),
-        "date": ParagraphStyle("Date", fontName="Helvetica", fontSize=8.2, leading=10, textColor=MUTED, alignment=2),
-        "small": ParagraphStyle("Small", fontName="Helvetica", fontSize=7.8, leading=10, textColor=MUTED),
-        "bullet": ParagraphStyle("Bullet", fontName="Helvetica", fontSize=8.25, leading=10.5, leftIndent=8, firstLineIndent=-6, textColor=INK, spaceAfter=1),
-        "project": ParagraphStyle("Project", fontName="Helvetica-Bold", fontSize=8.8, leading=10.5, textColor=INK),
+        "name": ParagraphStyle("Name", fontName="Helvetica-Bold", fontSize=23, leading=25, textColor=INK, spaceAfter=2),
+        "headline": ParagraphStyle("Headline", fontName="Helvetica-Bold", fontSize=9.4, leading=11.5, textColor=GOLD, spaceAfter=2),
+        "contact": ParagraphStyle("Contact", fontName="Helvetica", fontSize=8.0, leading=10.0, textColor=MUTED, spaceAfter=6),
+        "section": ParagraphStyle("Section", fontName="Helvetica-Bold", fontSize=8.8, leading=10.5, textColor=GOLD, spaceBefore=5, spaceAfter=2, uppercase=True),
+        "body": ParagraphStyle("Body", fontName="Helvetica", fontSize=8.2, leading=10.5, textColor=INK, spaceAfter=1),
+        "muted": ParagraphStyle("Muted", fontName="Helvetica", fontSize=7.8, leading=9.8, textColor=MUTED, spaceAfter=1),
+        "role": ParagraphStyle("Role", fontName="Helvetica-Bold", fontSize=8.6, leading=10.5, textColor=INK),
+        "date": ParagraphStyle("Date", fontName="Helvetica", fontSize=7.8, leading=9.8, textColor=MUTED, alignment=2),
+        "small": ParagraphStyle("Small", fontName="Helvetica", fontSize=7.4, leading=9.2, textColor=MUTED),
+        "bullet": ParagraphStyle("Bullet", fontName="Helvetica", fontSize=7.9, leading=10.0, leftIndent=7, firstLineIndent=-5, textColor=INK, spaceAfter=1),
+        "project": ParagraphStyle("Project", fontName="Helvetica-Bold", fontSize=8.4, leading=10.0, textColor=INK),
     }
 
 
@@ -58,44 +56,43 @@ class CVDoc(BaseDocTemplate):
     def _page(self, canvas, doc):
         canvas.saveState()
         canvas.setStrokeColor(LIGHT)
-        canvas.setLineWidth(0.45)
-        canvas.line(LEFT, 9.5 * mm, PAGE_W - RIGHT, 9.5 * mm)
+        canvas.setLineWidth(0.4)
+        canvas.line(LEFT, 8.5 * mm, PAGE_W - RIGHT, 8.5 * mm)
         canvas.setFont("Helvetica", 6.8)
         canvas.setFillColor(MUTED)
-        canvas.drawString(LEFT, 6.2 * mm, "Khalil Khalil")
-        canvas.drawRightString(PAGE_W - RIGHT, 6.2 * mm, f"{doc.page}")
+        canvas.drawString(LEFT, 5.5 * mm, "Khalil Khalil")
+        canvas.drawRightString(PAGE_W - RIGHT, 5.5 * mm, "Page 1 of 1")
         canvas.restoreState()
 
 
 def section(story, title, styles):
     story.append(Paragraph(title.upper(), styles["section"]))
-    story.append(HRFlowable(width="100%", thickness=0.55, color=LIGHT, spaceBefore=0, spaceAfter=5))
+    story.append(HRFlowable(width="100%", thickness=0.45, color=LIGHT, spaceBefore=0, spaceAfter=4))
 
 
 def bullet(text, styles):
-    return Paragraph(f"• {text}", styles["bullet"])
+    return Paragraph(f"- {text}", styles["bullet"])
 
 
 def role_block(role, company, dates, bullets, styles):
-    head = Table([[Paragraph(f"{esc(role)}<br/><font color='#5d5d5d'>{esc(company)}</font>", styles["role"]), Paragraph(esc(dates), styles["date"])]], colWidths=[CONTENT_W * 0.76, CONTENT_W * 0.24])
-    head.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 2)]))
+    head = Table([[Paragraph(f"{esc(role)}<br/><font color='#5d5d5d'>{esc(company)}</font>", styles["role"]), Paragraph(esc(dates), styles["date"])]], colWidths=[CONTENT_W * 0.77, CONTENT_W * 0.23])
+    head.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 1)]))
     content = [head] + [bullet(b, styles) for b in bullets]
     return KeepTogether(content)
 
 
 def education_row(degree, institution, dates, styles):
-    t = Table([[Paragraph(f"<b>{esc(degree)}</b><br/><font color='#5d5d5d'>{esc(institution)}</font>", styles["body"]), Paragraph(esc(dates), styles["date"])]], colWidths=[CONTENT_W * 0.76, CONTENT_W * 0.24])
-    t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 3)]))
+    t = Table([[Paragraph(f"<b>{esc(degree)}</b><br/><font color='#5d5d5d'>{esc(institution)}</font>", styles["body"]), Paragraph(esc(dates), styles["date"])]], colWidths=[CONTENT_W * 0.77, CONTENT_W * 0.23])
+    t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 2)]))
     return t
 
 
 def project_row(name, kind, description, url, styles):
-    left = Paragraph(f"<b>{esc(name)}</b><br/><font color='#5d5d5d'>{esc(description)}</font>", styles["body"])
+    left = Paragraph(f"<b>{esc(name)}</b> - <font color='#5d5d5d'>{esc(description)}</font>", styles["body"])
     right = Paragraph(esc(kind), styles["date"])
-    t = Table([[left, right]], colWidths=[CONTENT_W * 0.76, CONTENT_W * 0.24])
-    t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 3)]))
+    t = Table([[left, right]], colWidths=[CONTENT_W * 0.77, CONTENT_W * 0.23])
+    t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "TOP"), ("LEFTPADDING", (0, 0), (-1, -1), 0), ("RIGHTPADDING", (0, 0), (-1, -1), 0), ("TOPPADDING", (0, 0), (-1, -1), 0), ("BOTTOMPADDING", (0, 0), (-1, -1), 1)]))
     if url:
-        # Add a linked project name in a separate, compact line below the description.
         t2 = Paragraph(link(url.replace("https://", ""), url), styles["small"])
         return [t, t2]
     return [t]
@@ -119,97 +116,102 @@ def header(story, headline, styles):
 
 def build_creative():
     s = make_styles(); story = []
-    header(story, "Brand Identity | Logo & Social Media Design | Content Creation", s)
+    header(story, "Brand Architecture | AI-Driven Content & Growth Systems | Visual Identity", s)
+    
     section(story, "Profile", s)
-    story.append(Paragraph("Creative designer and visual storyteller based in Syria, specialising in brand identity, logo design, social media design and bilingual content. I develop clear visual systems for Arab-market clients and work remotely in Arabic and English.", s["body"]))
+    story.append(Paragraph("Brand architect and creative strategist based in Syria, working with Arab-market and international clients. I develop distinct visual identities, kinetic motion systems, and AI-driven 30-day content and growth engines that combine audience psychology with rapid execution.", s["body"]))
 
     section(story, "Experience", s)
-    story.append(role_block("Freelance Graphic Designer & Content Creator", "Self-employed, remote", "2021 – Present", [
-        "Developed brand identities, logos and visual systems for Gulf and Arab-market clients.",
-        "Created social media content and campaigns for Instagram, Facebook and Snapchat.",
-        "Produced packaging, print materials and campaign artwork for food and beverage brands.",
-        "Wrote and adapted bilingual Arabic/English marketing content.",
+    story.append(role_block("Brand Designer & AI Growth Strategist", "Freelance, remote", "2021 - Present", [
+        "Architected end-to-end brand identities, logos, and design systems for Arab and Gulf-market businesses.",
+        "Engineered 30-day AI-driven content engines: mining competitor friction, defining visual directions, and drafting bilingual copy.",
+        "Produced kinetic motion graphics, packaging, and digital campaign assets using modern compositing tools.",
+        "Delivered strategic brand collateral and social media visual guidelines across Instagram, Facebook, and TikTok.",
     ], s))
-    story.append(Spacer(1, 3))
-    story.append(role_block("Training & Career Guidance", "Independent, remote", "Ongoing", [
-        "Trained and supported 100+ learners across programming, web development, cybersecurity, design, data and career readiness.",
-        "Prepared course files, study roadmaps, practice plans and career research for different learning goals.",
+    story.append(Spacer(1, 2))
+    story.append(role_block("Content Strategy & Digital Mentorship", "Independent, remote", "Ongoing", [
+        "Mentored and guided 100+ learners across visual design, branding hierarchy, copywriting, and AI-assisted production workflows.",
+        "Authored structured design roadmaps and practical curriculum blueprints for digital creators.",
     ], s))
 
     section(story, "Selected Work", s)
     for item in [
-        ("Almira", "Visual identity", "Arabic calligraphic logo and campaign artwork in a deep green and gold palette.", "https://khalil-m-khalil.github.io/#work"),
-        ("WHY Z", "Logo & brand identity", "Logo concept, colour and type system, business cards and stationery for a creative marketing agency.", "https://khalil-m-khalil.github.io/#work"),
-        ("Take Car Taxi", "Social media design", "Campaign post built on a yellow and black identity, with the logo applied to the vehicle.", "https://khalil-m-khalil.github.io/#work"),
+        ("Almira", "Visual Identity", "Arabic calligraphic logo system and campaign artwork in a deep green and gold palette.", "https://khalil-m-khalil.github.io/#work"),
+        ("WHY Z", "Brand Identity", "Complete logo concept, color and typographic system, and stationery for a creative agency.", "https://khalil-m-khalil.github.io/#work"),
+        ("Take Car Taxi", "Campaign System", "High-visibility social media campaign post and vehicle branding system in yellow and black.", "https://khalil-m-khalil.github.io/#work"),
     ]:
-        story.extend(project_row(*item, s)); story.append(Spacer(1, 2))
+        story.extend(project_row(*item, s)); story.append(Spacer(1, 1))
 
     section(story, "Education", s)
-    story.append(education_row("BSc Computer Science (in progress)", "University of the People (UoPeople), online", "2023 – Present", s))
+    story.append(education_row("BSc Computer Science (in progress)", "University of the People (UoPeople), online", "2023 - Present", s))
     story.append(education_row("Bachelor of Law", "Hawash Private University (HPU), Homs, Syria", "Graduated", s))
 
-    section(story, "Core Skills &amp; Tools", s)
-    story.append(Paragraph("<b>Skills:</b> Brand identity &amp; logo design | Social media design | Packaging &amp; print | Photography &amp; editing | Content strategy &amp; copywriting | AI-assisted workflows", s["body"]))
-    story.append(Paragraph("<b>Tools:</b> Adobe Illustrator | Adobe Photoshop | Adobe Lightroom | Figma", s["body"]))
+    section(story, "Core Skills & Tools", s)
+    story.append(Paragraph("<b>Creative & Strategy:</b> Brand Architecture &amp; Logo Systems | 30-Day AI Content Engines | Kinetic Motion | Audience Friction Mining | Packaging &amp; Print | Bilingual Copywriting", s["body"]))
+    story.append(Paragraph("<b>Software & Toolchain:</b> Adobe Illustrator | Adobe Photoshop | Adobe Premiere Pro | Figma | Remotion | AI Generative Pipelines", s["body"]))
 
-    section(story, "Selected Links", s)
+    section(story, "Links & Languages", s)
     story.append(Paragraph(
         link("Portfolio", "https://khalil-m-khalil.github.io/") + " &nbsp;|&nbsp; "
-        + link("Work archive", "https://drive.google.com/drive/folders/1rTo1E-fPrPY6pIhvT161_SrQnGuniPov?usp=sharing") + " &nbsp;|&nbsp; "
-        + link("Training evidence", "https://drive.google.com/drive/folders/13GqGvguyTr6kWKUW5x6vtzwh6g4zrEBA?usp=drive_link") + " &nbsp;|&nbsp; "
-        + link("Instagram @khalil_m_khalil09", "https://www.instagram.com/khalil_m_khalil09/"), s["body"]))
-    story.append(Paragraph("<b>Languages:</b> Arabic (native) | English (professional)", s["body"]))
+        + link("Design Archive", "https://drive.google.com/drive/folders/1rTo1E-fPrPY6pIhvT161_SrQnGuniPov?usp=sharing") + " &nbsp;|&nbsp; "
+        + link("Training Proof", "https://drive.google.com/drive/folders/13GqGvguyTr6kWKUW5x6vtzwh6g4zrEBA?usp=drive_link") + " &nbsp;|&nbsp; "
+        + link("Instagram @khalil_m_khalil09", "https://www.instagram.com/khalil_m_khalil09/"), s["small"]))
+    story.append(Paragraph("<b>Languages:</b> Arabic (Native) | English (Professional)", s["body"]))
+    
     CVDoc(str(OUT / "Khalil_Khalil_CV_Creative.pdf")).build(story)
 
 
 def build_technical():
     s = make_styles(); story = []
-    header(story, "Security Research | Web Development | Digital Forensics (Learning)", s)
+    header(story, "AI Solutions Architecture | Vulnerability Research | Full-Stack Systems", s)
+    
     section(story, "Profile", s)
-    story.append(Paragraph("Computer Science student at the University of the People and independent security researcher. I am also a law graduate from Hawash Private University in Syria. I document vulnerabilities, build web tools, and practise digital forensics and Linux-based analysis as a learning-focused technical track.", s["body"]))
+    story.append(Paragraph("AI-native solutions architect and cybersecurity researcher combining legal analytical rigor (Bachelor of Law, HPU) with Computer Science studies (University of the People). Proven track record discovering critical logic vulnerabilities (Meta race condition recognized by OffSec), building local forensics utilities, and directing advanced LLMs to engineer deterministic prompt architectures, browser automation workflows, and production software.", s["body"]))
 
     section(story, "Experience", s)
-    story.append(role_block("Web Developer & Technical Content Writer", "Freelance, remote", "2022 – Present", [
-        "Built responsive portfolio and landing-page websites using HTML, CSS and JavaScript.",
-        "Developed local-first tools and interfaces, including the Phoenix verification dashboard and Nabra keyboard-layout utility.",
-        "Authored Arabic-language technical training materials on Linux and cybersecurity.",
+    story.append(role_block("AI Solutions Architect & Systems Prototyper", "Freelance, remote", "2022 - Present", [
+        "Directed LLMs to engineer functioning Python, WebGL, and SQLite applications (Phoenix dashboard, Nabra keyboard utility, Sada noise calibrator).",
+        "Designed automated browser execution workflows, high-volume data ingestion pipelines, and structured document synthesis.",
+        "Authored open-source prompt architectures utilizing Chain-of-Thought (CoT) and structured JSON/XML schemas to eliminate hallucinations.",
     ], s))
-    story.append(Spacer(1, 3))
-    story.append(role_block("Independent Security Researcher", "Self-directed research", "2024 – Present", [
-        "Documented a race-condition vulnerability in an email-confirmation workflow and produced a technical report covering methodology and impact.",
-        "The research was highlighted by OffSec in March 2026; additional open-redirect research is documented in the research archive.",
+    story.append(Spacer(1, 2))
+    story.append(role_block("Independent Security Researcher", "Self-directed research", "2024 - Present", [
+        "Discovered and documented a critical race condition in Meta's OAuth/email confirmation workflow; highlighted by OffSec in March 2026.",
+        "Conducted logic flaw testing via Burp Suite, open redirect evaluations, and OSINT digital forensics investigations.",
+        "Provided confidential incident triage, unauthorized account takedowns, and digital extortion mitigation for individuals and creators.",
     ], s))
-    story.append(Spacer(1, 3))
-    story.append(role_block("Technical Training & Career Guidance", "Independent, remote", "Ongoing", [
-        "Trained and supported 100+ learners across programming, web development, cybersecurity and career readiness.",
-        "Prepared structured course files, study roadmaps, practice plans and field research for learners.",
+    story.append(Spacer(1, 2))
+    story.append(role_block("Technical Training & Open-Source Protocols", "Independent, remote", "Ongoing", [
+        "Engineered the open-source Career Roadmap and App Validation Protocols on GitHub, establishing reproducible AI evaluation gates.",
+        "Mentored 100+ learners across cybersecurity fundamentals, web development, and applied AI workflows.",
     ], s))
 
-    section(story, "Recognition &amp; Selected Projects", s)
+    section(story, "Recognition & Key Projects", s)
     for item in [
-        ("OffSec highlight", "Recognition", "Race-condition research on a Meta platform highlighted in March 2026.", "https://drive.google.com/drive/folders/1HXxHzGPUjzUS0UELDB2VLeCQS-KJ0T_A?usp=drive_link"),
-        ("Horizon Lab", "Digital forensics", "Ranked #1 in Syria and #177 worldwide with a 93% score using Phoenix.", "https://drive.google.com/drive/folders/1fVV4dVbT0LvDbXnkb4AqCLJVFaOdKqos?usp=drive_link"),
-        ("Phoenix", "Local verification dashboard", "A local analysis and digital-forensics tool used in the Horizon Lab competition.", "https://khalil-m-khalil.github.io/Phoenix/"),
-        ("Nabra", "Windows utility", "Local Arabic/English keyboard-layout conversion without translation or cloud processing.", "https://drive.google.com/drive/folders/1CDHuI3SuQ9POROOW8RtkNexvn0x_kEOS?usp=drive_link"),
+        ("OffSec Highlight", "Recognition", "Race condition research on a Meta platform highlighted in March 2026.", "https://drive.google.com/drive/folders/1HXxHzGPUjzUS0UELDB2VLeCQS-KJ0T_A?usp=drive_link"),
+        ("Horizon Lab", "Forensics", "Ranked #1 in Syria and #177 worldwide with 93% score in digital forensics using Phoenix.", "https://drive.google.com/drive/folders/1fVV4dVbT0LvDbXnkb4AqCLJVFaOdKqos?usp=drive_link"),
+        ("Phoenix & Nabra", "Software", "Local digital forensics verification dashboard and offline Windows bilingual keyboard utility.", "https://khalil-m-khalil.github.io/Phoenix/"),
+        ("AI Protocols", "Open Source", "Deterministic prompt architectures and agentic pipelines with 100+ research roadmaps.", "https://github.com/Khalil-M-Khalil"),
     ]:
         story.extend(project_row(*item, s)); story.append(Spacer(1, 1))
 
     section(story, "Education", s)
-    story.append(education_row("BSc Computer Science (in progress)", "University of the People (UoPeople), online", "2023 – Present", s))
+    story.append(education_row("BSc Computer Science (in progress)", "University of the People (UoPeople), online", "2023 - Present", s))
     story.append(education_row("Bachelor of Law", "Hawash Private University (HPU), Homs, Syria", "Graduated", s))
 
-    section(story, "Technical Skills", s)
-    story.append(Paragraph("<b>Web:</b> HTML | CSS | JavaScript | responsive interfaces &amp; local-first tools", s["body"]))
-    story.append(Paragraph("<b>Security &amp; systems:</b> Vulnerability research | Linux &amp; command line | security awareness &amp; GRC (learning) | digital forensics (learning)", s["body"]))
-    story.append(Paragraph("<b>Hands-on practice:</b> Wireshark | tcpdump | Nmap | UFW | Sleuth Kit | Autopsy | Plaso | Foremost | TestDisk | ExifTool | Volatility 3 | Debian", s["body"]))
+    section(story, "Technical Skills & Toolchain", s)
+    story.append(Paragraph("<b>AI & Automation:</b> Prompt Architecture | Chain-of-Thought (CoT) | Few-Shot Calibration | LLM Orchestration (Claude, GPT-4) | Structured Outputs (JSON/XML) | Browser &amp; Data Automation", s["body"]))
+    story.append(Paragraph("<b>Security & Forensics:</b> Vulnerability Research | Logic Flaws &amp; Race Conditions | Burp Suite | Wireshark | Nmap | Sleuth Kit | Autopsy | Volatility 3 | Incident Triage", s["body"]))
+    story.append(Paragraph("<b>Development & Systems:</b> Python | HTML5 | CSS3 | JavaScript | SQLite | WebGL | Linux / Debian | Git / GitHub", s["body"]))
 
-    section(story, "Links &amp; Languages", s)
+    section(story, "Links & Languages", s)
     story.append(Paragraph(
         link("Portfolio", "https://khalil-m-khalil.github.io/") + " &nbsp;|&nbsp; "
         + link("GitHub", "https://github.com/Khalil-M-Khalil") + " &nbsp;|&nbsp; "
-        + link("Training evidence", "https://drive.google.com/drive/folders/13GqGvguyTr6kWKUW5x6vtzwh6g4zrEBA?usp=drive_link") + " &nbsp;|&nbsp; "
-        + link("Research archive", "https://drive.google.com/drive/folders/1HXxHzGPUjzUS0UELDB2VLeCQS-KJ0T_A?usp=drive_link"), s["small"]))
-    story.append(Paragraph("<b>Languages:</b> Arabic (native) | English (professional)", s["body"]))
+        + link("Training Proof", "https://drive.google.com/drive/folders/13GqGvguyTr6kWKUW5x6vtzwh6g4zrEBA?usp=drive_link") + " &nbsp;|&nbsp; "
+        + link("Research Archive", "https://drive.google.com/drive/folders/1HXxHzGPUjzUS0UELDB2VLeCQS-KJ0T_A?usp=drive_link"), s["small"]))
+    story.append(Paragraph("<b>Languages:</b> Arabic (Native) | English (Professional)", s["body"]))
+    
     CVDoc(str(OUT / "Khalil_Khalil_CV_Technical.pdf")).build(story)
 
 
