@@ -61,7 +61,7 @@ class CVDoc(BaseDocTemplate):
         canvas.line(LEFT, 8.0 * mm, PAGE_W - RIGHT, 8.0 * mm)
         canvas.setFont("Helvetica", 6.8)
         canvas.setFillColor(MUTED)
-        canvas.drawString(LEFT, 5.0 * mm, "Khalil Khalil")
+        canvas.drawString(LEFT, 5.0 * mm, "Khalil Muhammad Khaleel")
         canvas.drawRightString(PAGE_W - RIGHT, 5.0 * mm, "Page 1 of 1")
         canvas.restoreState()
 
@@ -101,7 +101,7 @@ def project_row(name, kind, description, url, styles):
 
 def header(story, headline, styles):
     story.extend([
-        Paragraph("Khalil Khalil", styles["name"]),
+        Paragraph("Khalil Muhammad Khaleel", styles["name"]),
         Paragraph(esc(headline), styles["headline"]),
         Paragraph(
             "Homs, Syria &nbsp;|&nbsp; "
