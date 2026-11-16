@@ -145,7 +145,7 @@ def build_creative():
         story.extend(project_row(*item, s)); story.append(Spacer(1, 1))
 
     section(story, "Education", s)
-    story.append(education_row("BSc Computer Science (in progress)", "University of the People (UoPeople), online", "2023 - Present", s))
+    story.append(education_row("BSc Computer Science (in progress)", "University of the People (UoPeople), online - English: CEFR B2+", "2023 - Present", s))
     story.append(education_row("Bachelor of Law", "Hawash Private University (HPU), Homs, Syria", "Graduated", s))
 
     section(story, "Core Skills & Tools", s)
@@ -158,7 +158,7 @@ def build_creative():
         + link("Zanzibar Drive Archive", "https://drive.google.com/drive/folders/1iZqTKa-MxsCA1ScsWD-Tozpyn4nk1YFB?usp=sharing") + " &nbsp;|&nbsp; "
         + link("Design Archive", "https://drive.google.com/drive/folders/1rTo1E-fPrPY6pIhvT161_SrQnGuniPov?usp=sharing") + " &nbsp;|&nbsp; "
         + link("Instagram @khalil_m_khalil09", "https://www.instagram.com/khalil_m_khalil09/"), s["small"]))
-    story.append(Paragraph("<b>Languages:</b> Arabic (Native) | English (Professional)", s["body"]))
+    story.append(Paragraph("<b>Languages:</b> Arabic (Native) | English (Professional - CEFR B2+ Certified, UoPeople)", s["body"]))
     
     pdf_path = OUT / "Khalil_Khalil_CV_Creative.pdf"
     CVDoc(str(pdf_path)).build(story)
@@ -202,7 +202,7 @@ def build_technical():
         story.extend(project_row(*item, s)); story.append(Spacer(1, 1))
 
     section(story, "Education", s)
-    story.append(education_row("BSc Computer Science (in progress)", "University of the People (UoPeople), online", "2023 - Present", s))
+    story.append(education_row("BSc Computer Science (in progress)", "University of the People (UoPeople), online - English: CEFR B2+", "2023 - Present", s))
     story.append(education_row("Bachelor of Law", "Hawash Private University (HPU), Homs, Syria", "Graduated", s))
 
     section(story, "Technical Skills & Toolchain", s)
@@ -216,7 +216,7 @@ def build_technical():
         + link("GitHub", "https://github.com/Khalil-M-Khalil") + " &nbsp;|&nbsp; "
         + link("Training Proof", "https://drive.google.com/drive/folders/13GqGvguyTr6kWKUW5x6vtzwh6g4zrEBA?usp=drive_link") + " &nbsp;|&nbsp; "
         + link("Research Archive", "https://drive.google.com/drive/folders/1HXxHzGPUjzUS0UELDB2VLeCQS-KJ0T_A?usp=drive_link"), s["small"]))
-    story.append(Paragraph("<b>Languages:</b> Arabic (Native) | English (Professional)", s["body"]))
+    story.append(Paragraph("<b>Languages:</b> Arabic (Native) | English (Professional - CEFR B2+ Certified, UoPeople)", s["body"]))
     
     pdf_path = OUT / "Khalil_Khalil_CV_Technical.pdf"
     CVDoc(str(pdf_path)).build(story)
