@@ -2253,6 +2253,30 @@ footer {
   margin-top: 48px;
 }
 
+.film-card-widescreen .film-grid {
+  grid-template-columns: 440px 1fr;
+  gap: 36px;
+}
+
+@media (max-width: 1120px) {
+  .film-card-widescreen .film-grid {
+    grid-template-columns: 380px 1fr;
+  }
+}
+
+@media (max-width: 980px) {
+  .film-card-widescreen .film-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .film-card-widescreen .film-poster-card {
+    max-width: 100%;
+  }
+  .film-card-widescreen .film-book-preview {
+    max-width: 100%;
+  }
+}
+
 .film-item-title {
   font-size: 1.55rem;
   font-weight: 700;
