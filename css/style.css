@@ -1116,9 +1116,10 @@ footer {
 .nabra-arrow{color:#ed652d;font-size:1.4rem;line-height:1}
 .nabra-window-foot{display:flex;justify-content:space-between;gap:12px;padding-top:16px;border-top:1px solid rgba(255,255,255,.1);color:var(--muted);font-size:.6rem;font-weight:700;letter-spacing:.1em}
 .nabra-btn{display:inline-flex;margin-top:8px}
-@media(max-width:660px){.signal-box.nabra-visual{min-height:420px;aspect-ratio:auto;padding:22px}.nabra-window{padding:16px}.nabra-window-foot{font-size:.54rem}}
+.nabra-panel{margin-top:88px;padding-top:72px;border-top:1px solid rgba(214,168,63,.16)}
+@media(max-width:660px){.nabra-panel{margin-top:56px;padding-top:44px;border-top:1px solid rgba(214,168,63,.16)}.signal-box.nabra-visual{min-height:420px;aspect-ratio:auto;padding:22px}.nabra-window{padding:16px}.nabra-window-foot{font-size:.54rem}}
 /* ===== Sada ===== */
-.sada-panel{margin-top:48px}
+.sada-panel{margin-top:88px;padding-top:72px;border-top:1px solid rgba(214,168,63,.16)}
 .sada-visual{min-height:0;aspect-ratio:16/9;background:#0b1322;overflow:hidden}
 .sada-visual .signal-image{object-fit:contain;background:#0b1322;filter:saturate(.95) contrast(1.02)}
 .sada-gallery{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:20px 0 18px}
@@ -1127,7 +1128,8 @@ footer {
 .sada-gallery figure:hover img{transform:translateY(-2px);border-color:rgba(242,212,125,.45)}
 .sada-gallery figcaption{margin-top:6px;color:var(--muted);font-size:.78rem;font-weight:600;line-height:1.4}
 .sada-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}
-@media(max-width:660px){.sada-panel{margin-top:32px}.signal-box.sada-visual{width:100%;min-height:0;aspect-ratio:16/9}.sada-gallery{grid-template-columns:1fr 1fr;gap:10px}.sada-gallery figcaption{font-size:.72rem}.sada-actions{flex-direction:column;align-items:stretch}}
+.phoenix-actions{margin-top:20px;margin-bottom:14px}
+@media(max-width:660px){.sada-panel{margin-top:56px;padding-top:44px;border-top:1px solid rgba(214,168,63,.16)}.signal-box.sada-visual{width:100%;min-height:0;aspect-ratio:16/9}.sada-gallery{grid-template-columns:1fr 1fr;gap:10px}.sada-gallery figcaption{font-size:.72rem}.sada-actions{flex-direction:column;align-items:stretch}}
 /* ===== Testimonials ===== */
 .testimonial-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
 .testimonial-card{display:flex;flex-direction:column;padding:24px;border:1px solid rgba(214,168,63,.18);border-radius:var(--radius);background:rgba(255,255,255,.035);transition:transform .28s ease,border-color .28s ease,background .28s ease}
