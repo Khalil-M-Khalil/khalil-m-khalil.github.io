@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Khalil Khalil – 3D Interactive Gallery Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#0f1013;
+  --ink:#f2ede4;
+  --mute:#8e9299;
+  --wall:#181a1f;
+  --floor:#121317;
+  --line:#2d3038;
+  --gold:#d4af37;
+  --gold-glow:rgba(212,175,55,0.22);
+  color-scheme:dark;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px)
+}
+:root[data-theme="light"]{
+  --paper:#f4f3ef;
+  --ink:#1a1b1e;
+  --mute:#6e7075;
+  --wall:#eae9e4;
+  --floor:#dad9d3;
+  --line:#bebfb9;
+  --gold:#9a7b20;
+  --gold-glow:rgba(154,123,32,0.18);
+  color-scheme:light;
+}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{height:100%;margin:0}
+*,*::before,*::after{box-sizing:border-box}
+body{background:var(--wall);color:var(--ink);font:400 15px/1.5 "Familjen Grotesk",system-ui,sans-serif;overflow:hidden;user-select:none;-webkit-user-select:none}
+a{color:inherit;text-decoration:none}
+canvas{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+canvas:active{cursor:grabbing}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.top{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:calc(env(safe-area-inset-top,0px) + 16px) 24px 0;font-weight:600;z-index:2}
+.top .brand{display:flex;align-items:center;gap:10px;font-size:1.05rem;letter-spacing:-.01em}
+.top .brand-badge{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;padding:3px 9px;border-radius:99px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--gold)}
+.top-actions{display:flex;align-items:center;gap:12px}
+.theme-btn{background:transparent;border:1px solid var(--line);color:var(--mute);border-radius:99px;padding:.4em .9em;cursor:pointer;font:inherit;font-size:.82rem;font-weight:600;transition:all .2s ease}
+.theme-btn:hover{color:var(--ink);border-color:var(--ink)}
+.cap{position:fixed;left:0;right:0;bottom:0;padding:0 20px calc(env(safe-area-inset-bottom,0px) + 24px);display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;pointer-events:none;z-index:2}
+.cap>*{pointer-events:auto}
+.cap h1{margin:0;font-size:clamp(1.4rem,3.2vw,2rem);font-weight:700;letter-spacing:-.02em;line-height:1.15;color:var(--ink);text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.cap p{margin:0;color:var(--mute);font-size:.95rem}
+.row{display:flex;align-items:center;gap:12px;margin-top:10px}
+.btn{font:inherit;font-weight:600;color:var(--ink);background:rgba(20,22,26,.8);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line);border-radius:99px;padding:.58em 1.35em;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .22s ease;box-shadow:0 4px 18px rgba(0,0,0,.35)}
+.btn:hover{background:var(--ink);color:var(--paper);border-color:var(--ink);transform:translateY(-1px)}
+.btn-primary{background:var(--gold);color:#0a0b0d;border-color:var(--gold);font-weight:700}
+.btn-primary:hover{background:#ecd06d;border-color:#ecd06d;color:#0a0b0d}
+.rb{width:40px;height:40px;padding:0;display:grid;place-items:center;border-color:var(--line);font-size:1.2rem}
+.count{min-width:4.8em;text-align:center;color:var(--mute);font-variant-numeric:tabular-nums;font-size:.86rem;letter-spacing:.05em}
+#hint{transition:opacity .6s;font-size:.84rem;letter-spacing:.02em;color:var(--mute);background:rgba(15,16,19,.75);backdrop-filter:blur(8px);padding:4px 14px;border-radius:99px;border:1px solid var(--line)}
+#hint.gone{opacity:0;pointer-events:none}
+#detail{position:fixed;inset:0;z-index:5;background:var(--paper);display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:5vw;padding:calc(env(safe-area-inset-top,0px) + 70px) 6vw calc(env(safe-area-inset-bottom,0px) + 40px);overflow:auto;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s;user-select:text;-webkit-user-select:text}
+#detail.open{opacity:1;visibility:visible;transition:opacity .35s ease}
+.detail-media-wrap{display:flex;align-items:center;justify-content:center;width:100%;height:100%;max-height:78vh}
+#detail img{display:block;max-width:100%;max-height:76vh;object-fit:contain;border-radius:12px;border:1px solid var(--line);box-shadow:0 18px 48px rgba(0,0,0,.5);transform:scale(.95);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+#detail.open img{transform:none}
+.x{position:fixed;top:calc(env(safe-area-inset-top,0px) + 16px);right:24px;z-index:6}
+.dt h2{margin:0 0 .3em;font-size:clamp(2.3rem,5vw,3.8rem);line-height:1.05;letter-spacing:-.03em;font-weight:700}
+.dt .meta{color:var(--gold);font-weight:600;font-size:1.02rem;letter-spacing:.02em;margin:0 0 1.2em;display:flex;align-items:center;gap:8px}
+.dt .meta span{color:var(--mute);font-weight:400}
+.dt .body{font:400 1.15rem/1.75 "Newsreader",Georgia,serif;max-width:48ch;margin:0 0 1.6em;color:var(--ink)}
+.tags{list-style:none;margin:0 0 2.2em;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.tags li{border:1px solid var(--line);border-radius:99px;padding:.26em .9em;font-size:.85rem;color:var(--mute);background:rgba(255,255,255,.03)}
+.acts{display:flex;flex-wrap:wrap;gap:12px}
+.fallback{position:fixed;inset:0;display:grid;place-items:center;padding:24px;text-align:center}
+@media (max-width:880px){
+  #detail{grid-template-columns:1fr;align-items:start;gap:28px;padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+  #detail img{max-height:48vh}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="c" aria-label="3D gallery of selected projects"></canvas>
+
+<header class="top">
+  <div class="brand">
+    <a href="index.html" id="top">Khalil Khalil</a>
+    <span class="brand-badge">3D Gallery Preview</span>
+  </div>
+  <div class="top-actions">
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle color theme">Theme</button>
+    <a class="theme-btn" href="index.html" aria-label="Back to main portfolio">&larr; Main Site</a>
+  </div>
+</header>
+
+<div class="cap">
+  <p id="hint">Scroll, drag or use arrow keys to navigate gallery</p>
+  <h1 id="ct"></h1>
+  <p id="cm"></p>
+  <div class="row">
+    <button class="btn rb" id="pv" aria-label="Previous project">&#8249;</button>
+    <button class="btn btn-primary" id="vw">View project</button>
+    <button class="btn rb" id="nx" aria-label="Next project">&#8250;</button>
+  </div>
+  <p class="count" id="cn" aria-live="polite"></p>
+</div>
+
+<section id="detail" inert aria-label="Project details">
+  <button class="btn x" id="cl" aria-label="Close project modal">&times; Close</button>
+  <div class="detail-media-wrap">
+    <img id="di" alt="Project artwork">
+  </div>
+  <div class="dt">
+    <h2 id="dh"></h2>
+    <p class="meta" id="dm"></p>
+    <p class="body" id="dp"></p>
+    <ul class="tags" id="dg"></ul>
+    <div class="acts">
+      <a class="btn btn-primary" id="da" href="mailto:khalilmkhalil0937@gmail.com">Start a project</a>
+      <button class="btn" id="dn">Next project &rarr;</button>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ==== Khalil Khalil Portfolio Works ====
+const W=[
+ {
+   t:'Phoenix Forensic Suite',
+   type:'Threat Intel & Forensics',
+   y:2026,
+   img:'assets/phoenix.webp',
+   d:'Deterministic client-side threat intelligence and digital forensic workstation. Built with native Punycode homograph lookalike detection, canvas Error Level Analysis (ELA), VoIP fraud carrier risk scoring, and SHA-256 cryptographic evidence capsules.',
+   tags:['Digital Forensics','Threat Intel','Security Rigor','AI Suite'],
+   accent:'#d4af37'
+ },
+ {
+   t:'Almira Identity System',
+   type:'Calligraphic Brand Architecture',
+   y:2026,
+   img:'assets/almira-1.webp',
+   d:'A bespoke Arabic calligraphic identity system for luxury regional hospitality. Features custom ligature letterforms, geometric grid stationery, prestige packaging, and cohesive multi-channel visual guidelines.',
+   tags:['Brand Identity','Arabic Calligraphy','Packaging','Art Direction'],
+   accent:'#c89e47'
+ },
+ {
+   t:'Nabra Voice Intelligence',
+   type:'AI Speech Synthesis',
+   y:2026,
+   img:'assets/nabra-app-icon.png',
+   d:'Native Arabic speech synthesis engine and dialect phonetics workstation. Engineered for tonal modulation, real-time audio pipeline streaming, and authentic regional linguistic nuance.',
+   tags:['AI Voice','Speech Synthesis','Audio Pipeline','Product'],
+   accent:'#3d7be6'
+ },
+ {
+   t:'WHY Z Brand Book',
+   type:'Brand Architecture & Systems',
+   y:2025,
+   img:'assets/whyz-1.webp',
+   d:'Comprehensive brand book and visual architecture for an avant-garde digital marketing agency. Bold typographic hierarchies, strict spatial grids, stationery kits, and kinetic motion guidelines.',
+   tags:['Brand Book','Design Systems','Typography','Identity'],
+   accent:'#e05638'
+ },
+ {
+   t:'Zanzibar Reel',
+   type:'AI Generative Cinema',
+   y:2026,
+   img:'assets/film/poster-zanzibar-reel.webp',
+   d:'AI-native cinematic sequence featuring strict 9-angle skeletal and biometric facial consistency, atmospheric natural lighting, and architectural heritage storytelling without distortion.',
+   tags:['Generative Cinema','Facial Consistency','AI Film','Direction'],
+   accent:'#d48a37'
+ },
+ {
+   t:'Stronger Than Us',
+   type:'Cinematic Film Direction',
+   y:2026,
+   img:'assets/film/poster-stronger-than-us.webp',
+   d:'Dramatic cinematic production exploring resilience. Engineered with a deterministic multi-angle character prompt matrix, anamorphic camera lens emulation, and multi-turn color grading.',
+   tags:['Film Direction','Prompt Matrix','Cinematography','Visual Narrative'],
+   accent:'#8d37d4'
+ },
+ {
+   t:'Take Car Taxi (TCT)',
+   type:'Urban Campaign & Motion',
+   y:2025,
+   img:'assets/tct-1.webp',
+   d:'Dynamic urban ride-hailing visual identity, 3D fleet branding, and high-impact social motion campaign designed to stand out across fast-moving streetscapes and mobile feeds.',
+   tags:['Campaign','Motion Graphics','Fleet Branding','Social'],
+   accent:'#e6af3d'
+ },
+ {
+   t:'Sada Audio Engine',
+   type:'Spatial Acoustics & WebGL',
+   y:2025,
+   img:'assets/sada/calibrating.webp',
+   d:'Deterministic spatial acoustic environment and ambient soundscape system. Real-time soundwave physics simulation coupled with fluid kinetic WebGL interface design.',
+   tags:['Audio Engine','WebGL','Acoustics','Sound Design'],
+   accent:'#2ea888'
+ },
+ {
+   t:'Mahawa Kinetic System',
+   type:'Kinetic Motion Design',
+   y:2025,
+   img:'assets/motion/poster-mahawa.webp',
+   d:'Fluid typography and kinetic branding for modern cultural identity. Custom typographic physics, continuous easing curve choreography, and responsive screen pacing.',
+   tags:['Motion Design','Typography','Kinetic Branding','Culture'],
+   accent:'#3daee6'
+ },
+ {
+   t:'OffSec Highlight & Research',
+   type:'Vulnerability Research',
+   y:2026,
+   img:'assets/offsec.webp',
+   d:'Critical race condition vulnerability identified in production access-control architecture. Formally highlighted and certified by Offensive Security (OffSec) in March 2026.',
+   tags:['Vulnerability Research','OffSec','Race Condition','Security'],
+   accent:'#e63d59'
+ },
+ {
+   t:'Horizon Lab #1 SY',
+   type:'Digital Forensic Recognition',
+   y:2026,
+   img:'assets/horizon.webp',
+   d:'Ranked #1 in Syria and #177 worldwide in digital forensics at Horizon Lab, leveraging custom-engineered forensic inspection, triage workflows, and reverse-analysis protocols.',
+   tags:['#1 in Syria','Digital Forensics','Horizon Lab','Recognition'],
+   accent:'#3de6a2'
+ }
+];
+
+const N=W.length;
+
+// Fallback high-aesthetic canvas art card generator
+function art(w,i){
+  const c=document.createElement('canvas');c.width=600;c.height=800;
+  const g=c.getContext('2d');
+  
+  // Background gradient
+  const bg=g.createLinearGradient(0,0,600,800);
+  bg.addColorStop(0,'#16181d');
+  bg.addColorStop(1,'#0d0e11');
+  g.fillStyle=bg;g.fillRect(0,0,600,800);
+  
+  // Subtle glowing accent orb
+  const orb=g.createRadialGradient(300,320,10,300,320,280);
+  orb.addColorStop(0,w.accent||'#d4af37');
+  orb.addColorStop(0.35,w.accent?w.accent+'44':'rgba(212,175,55,0.18)');
+  orb.addColorStop(1,'rgba(0,0,0,0)');
+  g.fillStyle=orb;g.fillRect(0,0,600,800);
+  
+  // Technical grid overlay
+  g.strokeStyle='rgba(255,255,255,0.04)';g.lineWidth=1;
+  for(let x=40;x<600;x+=40){g.beginPath();g.moveTo(x,0);g.lineTo(x,800);g.stroke();}
+  for(let y=40;y<800;y+=40){g.beginPath();g.moveTo(0,y);g.lineTo(600,y);g.stroke();}
+  
+  // Border frame
+  g.strokeStyle='rgba(212,175,55,0.28)';g.lineWidth=2;
+  g.strokeRect(24,24,552,752);
+  
+  // Badge index
+  g.fillStyle=w.accent||'#d4af37';
+  g.font='700 13px "Familjen Grotesk", sans-serif';
+  g.fillText(String(i+1).padStart(2,'0')+' // LABS', 48, 64);
+  
+  // Title & Type
+  g.fillStyle='#ffffff';
+  g.font='700 32px "Familjen Grotesk", sans-serif';
+  const words=w.t.split(' ');
+  let l1='',l2='';
+  if(words.length>2){l1=words.slice(0,2).join(' ');l2=words.slice(2).join(' ');}
+  else{l1=w.t;}
+  g.fillText(l1,48,700);
+  if(l2) g.fillText(l2,48,735);
+  
+  g.fillStyle='rgba(255,255,255,0.6)';
+  g.font='500 15px "Familjen Grotesk", sans-serif';
+  g.fillText(w.type+' · '+w.y, 48, 660);
+  
+  return c;
+}
+
+const $=id=>document.getElementById(id),rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let R;try{R=new THREE.WebGLRenderer({canvas:$('c'),antialias:true,alpha:false,powerPreference:'high-performance'})}
+catch(e){document.body.insertAdjacentHTML('beforeend','<div class="fallback"><p>WebGL is required to walk this 3D gallery.</p></div>')}
+
+if(R){
+R.setPixelRatio(Math.min(devicePixelRatio,2));
+const S=new THREE.Scene(),cam=new THREE.PerspectiveCamera(52,1,.1,85);
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const wallM=new THREE.MeshLambertMaterial({side:THREE.DoubleSide}),floorM=new THREE.MeshLambertMaterial({side:THREE.DoubleSide});
+
+function updateSceneTheme(){
+  const w=new THREE.Color(css('--wall'));
+  wallM.color.set(w);
+  floorM.color.set(css('--floor'));
+  S.background=w;
+  S.fog=new THREE.Fog(w,12,42);
+}
+updateSceneTheme();
+
+// Theme toggle button
+$('themeBtn').onclick=()=>{
+  const cur=document.documentElement.getAttribute('data-theme')==='light'?'dark':'light';
+  document.documentElement.setAttribute('data-theme',cur);
+  setTimeout(updateSceneTheme,40);
+};
+
+S.add(new THREE.AmbientLight(0xffffff,.82));
+const dl=new THREE.DirectionalLight(0xffffff,.48);
+dl.position.set(-3,7,4);
+S.add(dl);
+
+const pts=[];for(let k=0;k<N+5;k++)pts.push(new THREE.Vector3(3.2*Math.sin(k*.62),0,-k*4.4));
+const curve=new THREE.CatmullRomCurve3(pts),D=4.6;
+const nrm=u=>{const t=curve.getTangentAt(u);return new THREE.Vector3(-t.z,0,t.x).normalize()};
+
+function ribbon(o1,o2,y1,y2,m){
+  const p=[],ix=[],M=140;
+  for(let k=0;k<=M;k++){
+    const u=k/M,c=curve.getPointAt(u),n=nrm(u);
+    p.push(c.x+n.x*o1,y1,c.z+n.z*o1,c.x+n.x*o2,y2,c.z+n.z*o2);
+    if(k<M){const a=k*2;ix.push(a,a+1,a+2,a+1,a+3,a+2)}
+  }
+  const g=new THREE.BufferGeometry();
+  g.setAttribute('position',new THREE.Float32BufferAttribute(p,3));
+  g.setIndex(ix);g.computeVertexNormals();
+  S.add(new THREE.Mesh(g,m));
+}
+ribbon(D,D,0,7.2,wallM);
+ribbon(D,-D*3,0,0,floorM);
+
+const meshes=[];
+const texLoader=new THREE.TextureLoader();
+
+W.forEach((w,i)=>{
+  w.cv=art(w,i);
+  const u=.1+.8*i/(N-1)+.06,c=curve.getPointAt(u),n=nrm(u),h=3.4*(1+(i%3)*.1),wd=h*.75;
+  
+  // Shadow backing plane
+  const sh=new THREE.Mesh(
+    new THREE.PlaneGeometry(wd*1.05,h*1.04),
+    new THREE.MeshBasicMaterial({color:0x000000,transparent:true,opacity:.25})
+  );
+  sh.position.set(c.x+n.x*(D-.015),1.92,c.z+n.z*(D-.015));
+  sh.lookAt(c.x,1.92,c.z);
+  S.add(sh);
+
+  // Artwork plane with fallback canvas texture
+  const mat=new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(w.cv)});
+  const m=new THREE.Mesh(new THREE.PlaneGeometry(wd,h),mat);
+  m.position.set(c.x+n.x*(D-.03),2,c.z+n.z*(D-.03));
+  m.lookAt(c.x,2,c.z);
+  m.userData.i=i;
+  S.add(m);
+  meshes.push(m);
+
+  // Load real project image onto texture
+  if(w.img){
+    texLoader.load(w.img, tex=>{
+      tex.generateMipmaps=true;
+      tex.minFilter=THREE.LinearMipmapLinearFilter;
+      m.material.map=tex;
+      m.material.needsUpdate=true;
+    },undefined,()=>{
+      // If error (e.g. strict local file CORS), fallback canvas is already active
+    });
+  }
+});
+
+function rs(){
+  const w=innerWidth,h=innerHeight;
+  R.setSize(w,h,false);
+  cam.aspect=w/h;
+  cam.fov=w/h<1?74:52;
+  cam.updateProjectionMatrix();
+}
+addEventListener('resize',rs);rs();
+
+const mouse={x:0,y:0};let tgt=0,cur=0,idle,drag=null,moved=0,last=-1,openI=-1,opener;
+const clamp=v=>Math.max(0,Math.min(N-1,v));
+
+function place(){
+  const u=.1+.8*cur/(N-1),c=curve.getPointAt(u),n=nrm(u),L=curve.getPointAt(Math.min(u+.075,1)),k=cam.aspect<1?.95:.5;
+  cam.position.set(c.x,1.55,c.z);
+  cam.lookAt(L.x+n.x*(D*k+mouse.x*1.4),1.9+mouse.y*.5,L.z+n.z*(D*k+mouse.x*1.4));
+}
+
+function caption(a){
+  $('ct').textContent=W[a].t;
+  $('cm').textContent=W[a].type+' · '+W[a].y;
+  $('cn').textContent=(a+1)+' / '+N;
+}
+
+function loop(){
+  cur+=(tgt-cur)*(rm?1:.075);
+  place();
+  R.render(S,cam);
+  const a=Math.round(cur);
+  if(a!==last){last=a;caption(a)}
+  requestAnimationFrame(loop);
+}
+loop();
+
+const hint=()=>$('hint').classList.add('gone');
+function snap(){clearTimeout(idle);idle=setTimeout(()=>{tgt=Math.round(tgt)},220)}
+function go(d){hint();tgt=clamp(Math.round(tgt)+d)}
+
+const cv=$('c');
+addEventListener('wheel',e=>{
+  if(openI>=0)return;
+  tgt=clamp(tgt+(Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY)*.0022);
+  hint();snap();
+},{passive:true});
+
+cv.addEventListener('pointerdown',e=>{drag={x:e.clientX,t:tgt};moved=0;cv.setPointerCapture(e.pointerId)});
+cv.addEventListener('pointermove',e=>{
+  if(!rm){mouse.x=e.clientX/innerWidth*2-1;mouse.y=1-e.clientY/innerHeight*2}
+  if(drag){
+    const dx=e.clientX-drag.x;moved=Math.max(moved,Math.abs(dx));
+    if(moved>6)hint();
+    tgt=clamp(drag.t-dx/innerWidth*3.2);
+  }
+});
+
+cv.addEventListener('pointerup',e=>{
+  if(drag&&moved<6){
+    const rc=new THREE.Raycaster();
+    rc.setFromCamera({x:e.clientX/innerWidth*2-1,y:1-e.clientY/innerHeight*2},cam);
+    const h=rc.intersectObjects(meshes)[0];
+    if(h)show(h.object.userData.i);
+  }
+  drag=null;snap();
+});
+
+const dt=$('detail');
+function show(i){
+  const w=W[i];
+  openI=i;
+  opener=document.activeElement;
+  $('di').src=w.img||w.cv.toDataURL('image/jpeg',.9);
+  $('di').onerror=function(){this.src=w.cv.toDataURL('image/jpeg',.9);};
+  $('di').alt=w.t+' artwork';
+  $('dh').textContent=w.t;
+  $('dm').innerHTML=w.type+' <span>·</span> '+w.y;
+  $('dp').textContent=w.d;
+  $('dg').innerHTML=w.tags.map(t=>'<li>'+t+'</li>').join('');
+  dt.scrollTop=0;
+  dt.removeAttribute('inert');
+  dt.classList.add('open');
+  $('cl').focus();
+}
+
+function hide(){
+  openI=-1;
+  dt.classList.remove('open');
+  dt.setAttribute('inert','');
+  if(opener)opener.focus();
+}
+
+$('cl').onclick=hide;
+$('dn').onclick=()=>show((openI+1)%N);
+$('vw').onclick=()=>show(Math.round(cur));
+$('pv').onclick=()=>go(-1);
+$('nx').onclick=()=>go(1);
+
+addEventListener('keydown',e=>{
+  if(e.key==='Escape'&&openI>=0)hide();
+  else if(openI<0){
+    if(/Arrow(Right|Down)|PageDown/.test(e.key))go(1);
+    else if(/Arrow(Left|Up)|PageUp/.test(e.key))go(-1);
+  }
+});
+}
+</script>
+</body>
+</html>
